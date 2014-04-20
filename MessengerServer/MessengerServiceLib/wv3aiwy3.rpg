@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace MessengerServiceLib
+{
+    public class MessengerService : IMessengerService
+    {
+        public void Login(string username)
+        {
+            var connection = new DataBaseConnector();
+            var result = connection.Query("SELECT * from users");
+
+            while (result.Read())
+            {
+                var name = result.GetString(0);
+            }
+        }
+
+        public IEnumerable<User> GetUsers(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendMessage(string username, string destination, string message)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

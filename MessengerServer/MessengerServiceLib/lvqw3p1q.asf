@@ -1,0 +1,30 @@
+﻿using System;
+using System.CodeDom;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+
+namespace MessengerServiceLib
+{
+    public class MessengerService : IMessengerService
+    {
+        public void Login(string username)
+        {
+            var connection = new DataBase();
+            connection.Login(username);
+        }
+
+        public User GetUsers(string username)
+        {
+            var connection = new DataBase();
+            var userList = connection.GetUsers(username);
+
+            return userList.Last();
+        }
+
+        public void SendMessage(string username, string destination, string message)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

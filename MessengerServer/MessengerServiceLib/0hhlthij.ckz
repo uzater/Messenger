@@ -1,0 +1,67 @@
+﻿using System.Collections.Generic;
+using MySql.Data.MySqlClient;
+
+namespace MessengerServiceLib
+{
+    class DataBase
+    {
+        private readonly MySqlConnection _connection;
+
+        public DataBase()
+        {
+            _connection = new MySqlConnection("Database=Messenger;Data Source=localhost;User Id=root;Password=pass");
+        }
+
+        public bool IfUser(string username)
+        {
+            var command = new MySqlCommand("SELECT * FROM users WHERE name=" + username) { Connection = _connection };
+            command.Connection.Open();
+            var reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                command.Connection.Close();
+                return true;
+            }
+
+            command.Connection.Close();
+            return true;
+        }
+
+        public void Login(string username)
+        {
+            if (IfUser(username))
+            {
+                var command = new MySqlCommand("UPDATE users SET online=true WHERE name="+username) { Connection = _connection };
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+                command.Clone();
+            }
+            else
+            {
+                var command = new MySqlCommand("INSERT INTO users (`name`, `online`) VALUES ("+username+", true)") { Connection = _connection };
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+                command.Clone();
+            }
+        }
+
+        public IEnumerable<User> GetUsers(string username)
+        {
+            if(!Login(username))
+                retur
+
+            var result = new List<User>();
+            command = new MySqlCommand("SELECT * FROM users") { Connection = _connection };
+            command.Connection.Open();
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+                result.Add(new User(reader.GetString(0), reader.GetBoolean(1)));
+
+            command.Connection.Close();
+
+            return result;
+        }
+    }
+}

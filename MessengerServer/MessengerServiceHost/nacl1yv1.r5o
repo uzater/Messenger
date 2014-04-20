@@ -1,19 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
   <system.serviceModel>
     <services>
       <service name="MessengerServiceLib.MessengerService"
                behaviorConfiguration="MessengerServiceMEXBehavior">
-        <endpoint address="net.tcp://localhost:8080/MessengerService"
-                  binding="netTcpBinding"
+        <endpoint address="http://localhost:8080/MessengerService"
+                  binding="basicHttpBinding"
                   contract="MessengerServiceLib.IMessengerService" />
         <endpoint address="mex"
-                  binding="mexTcpBinding"
+                  binding="mexHttpBinding"
                   contract="IMetadataExchange" />
         <host>
           <baseAddresses>
-            <add baseAddress="net.tcp://localhost:8080/MessengerService" />
+            <add baseAddress="http://localhost:8080/MessengerService" />
           </baseAddresses>
         </host>
       </service>

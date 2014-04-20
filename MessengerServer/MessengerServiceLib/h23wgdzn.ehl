@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using MessengerServerLib;
+
+namespace MessengerServiceLib
+{
+    public class MessengerService : IMessengerService
+    {
+        public event EventHandler<EventLoginArgs> ELogin;
+        public void Login(string username)
+        {
+            try
+            {
+                if (ELogin != null)
+                    ELogin(this, username);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Error: {0}", exception.Message);
+            }
+        }
+
+        public IEnumerable<User> GetUsers(string username)
+        {
+            IEnumerable<User> result = new List<User>();
+
+            try
+            {
+               result = _server.GetUsers(username);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Error: {0}", exception.Message);
+            }
+
+            return result;
+        }
+
+        public void SendMessage(string username, string destination, string message)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}

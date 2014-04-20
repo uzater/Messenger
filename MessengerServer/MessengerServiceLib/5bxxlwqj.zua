@@ -1,0 +1,28 @@
+﻿using System;
+using MySql.Data.MySqlClient;
+
+namespace MessengerServiceLib
+{
+    class DataBaseConnector
+    {
+        private readonly string _connectionString;
+        private readonly MySqlConnection _connection;
+
+        public DataBaseConnector()
+        {
+            _connectionString = "Database=Messenger;Data Source=localhost;User Id=root;Password=pass";
+            _connection = new MySqlConnection(_connectionString);
+        }
+
+        public MySqlDataReader Query(string query)
+        {
+            var command = new MySqlCommand(query) {Connection = _connection};
+            command.Connection.Open();
+            var reader = command.ExecuteReader();
+
+            command.Connection.Close();
+
+            return reader;
+        }
+    }
+}

@@ -7,12 +7,12 @@ namespace MessengerServiceLib
     public interface IMessengerService
     {
         [OperationContract]
-        int Login(string username);
+        void Login(string username);
 
         [OperationContract]
-        IEnumerable<User> GetUsers(int userID);
+        User[] GetUsers(string username);
 
         [OperationContract]
-        void SendMessage(Message message);
+        void SendMessage(string username, string destination, string message);
     }
 }

@@ -4,13 +4,13 @@ using MessengerServiceLib;
 
 namespace MessengerServiceHost
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Messenger Server in running...");
 
-            using (ServiceHost serviceHost = new ServiceHost(typeof(MessengerService)))
+            using (var serviceHost = new ServiceHost(typeof (MessengerService)))
             {
                 serviceHost.Open();
 

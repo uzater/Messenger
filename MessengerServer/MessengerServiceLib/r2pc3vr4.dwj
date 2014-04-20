@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace MessengerServiceLib
+{
+    public class MessengerService : IMessengerService
+    {
+        public void Login(string username)
+        {
+            var connection = new DataBase();
+            connection.Login(username);
+        }
+
+        public IEnumerable<User> GetUsers(string username)
+        {
+            var connection = new DataBase();
+            var userList = connection.GetUsers(username);
+            foreach (var user in userList)
+            {
+                Console.WriteLine("\t"+user.Username);
+            }
+
+            return userList;
+        }
+
+        public void SendMessage(string username, string destination, string message)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

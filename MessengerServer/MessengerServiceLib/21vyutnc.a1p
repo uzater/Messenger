@@ -1,0 +1,84 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using MySql.Data.MySqlClient;
+
+namespace MessengerServiceLib
+{
+    class DataBase : IDisposable
+    {
+        private readonly MySqlConnection _connection;
+        private MySqlCommand _command;
+
+        public DataBase()
+        {
+            _connection = new MySqlConnection("Database=Messenger;Data Source=localhost;User Id=root;Password=pass");
+            _command = new MySqlCommand() {Connection = _connection};
+            _command.Connection.Open();
+        }
+
+        public bool IfUser(string username)
+        {
+            return CheckUser("SELECT * FROM users WHERE username=\"" + username + "\"");
+        }
+
+        public bool IfUser(int id)
+        {
+            return CheckUser("SELECT * FROM users WHERE id=\"" + id + "\"");
+        }
+
+        private bool CheckUser(string query)
+        {
+            _command.CommandText = query;
+            
+            var reader = _command.ExecuteReader();
+
+            return reader.Read();
+        }
+
+        private void Query(string query)
+        {
+            _command.CommandText = query;
+            _command.ExecuteNonQuery();
+        }
+
+        public int Login(string username)
+        {
+            var query = (IfUser(username))
+                ? "UPDATE users SET online=true WHERE username=\"" + username + "\""
+                : "INSERT INTO users (`username`, `online`) VALUES (\"" + username + "\", true)";
+            Query(query);
+
+            query = "SELECT id FROM users WHERE username=\"" + username + "\"";
+            var command = new MySqlCommand(query) { Connection = _connection };
+            command.Connection.Open();
+            var reader = command.ExecuteReader();
+
+            if (!reader.Read())
+                return -1;
+
+            return reader.GetInt32(0);
+        }
+
+        public IEnumerable<User> GetUsers(int userID)
+        {
+            if (!IfUser(userID))
+                return null;
+
+            var result = new List<User>();
+            var command = new MySqlCommand("SELECT * FROM users") { Connection = _connection };
+            command.Connection.Open();
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+                result.Add(new User(reader.GetInt32(0), reader.GetString(1), reader.GetBoolean(2)));
+
+            return result.Where(u => u.Id != userID);
+        }
+
+        public void Dispose()
+        {
+            _connection.Close();
+        }
+    }
+}

@@ -1,0 +1,33 @@
+﻿using System;
+using System.ServiceModel;
+using MessengerServiceLib;
+
+namespace MessengerServiceHost
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Messenger Server in running...");
+
+            using (ServiceHost serviceHost = new ServiceHost(typeof(MessengerService)))
+            {
+                serviceHost.Open();
+
+                Console.WriteLine();
+                Console.WriteLine("Messenger service is ready.");
+                Console.WriteLine("Press <Enter> to exit.");
+
+                //foreach (var ep in serviceHost.Description.Endpoints)
+                //{
+                //    Console.WriteLine();
+                //    Console.WriteLine("Address: {0}", ep.Address);
+                //    Console.WriteLine("Binding: {0}", ep.Binding.Name);
+                //    Console.WriteLine("Contract: {0}", ep.Contract.Name);
+                //}
+
+                Console.ReadLine();
+            }
+        }
+    }
+}
