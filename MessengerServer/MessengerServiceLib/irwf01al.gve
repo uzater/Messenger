@@ -4,7 +4,7 @@ using MySql.Data.MySqlClient;
 
 namespace MessengerServiceLib
 {
-    public class DataBase : IDisposable
+    class DataBase : IDisposable
     {
         private readonly MySqlCommand _command;
         private MySqlDataReader _reader;
@@ -44,7 +44,7 @@ namespace MessengerServiceLib
 
         public bool IfUser(string username)
         {
-            return CheckUser("SELECT * FROM users WHERE name=\"" + username + "\"");
+            return CheckUser("SELECT * FROM users WHERE username=\"" + username + "\"");
         }
 
         public bool IfUser(int id)
@@ -55,12 +55,12 @@ namespace MessengerServiceLib
         public int Login(string username)
         {
             var query = (IfUser(username))
-                ? "UPDATE users SET online=true, refreshtime=NOW() WHERE name=\"" + username + "\""
-                : "INSERT INTO users (`name`, `online`) VALUES (\"" + username + "\", true)";
+                ? "UPDATE users SET online=true WHERE username=\"" + username + "\""
+                : "INSERT INTO users (`username`, `online`) VALUES (\"" + username + "\", true)";
             ExecuteNonQuery(query);
             _command.Connection.Close();
 
-            ExecuteReader("SELECT id FROM users WHERE name=\"" + username + "\"");
+            ExecuteReader("SELECT id FROM users WHERE username=\"" + username + "\"");
 
             if (!_reader.Read())
             {
@@ -96,18 +96,7 @@ namespace MessengerServiceLib
 
         public void AddMessage(Message message)
         {
-            ExecuteNonQuery("INSERT INTO messages (`userID`, `destinationID`, `message`) VALUES (" + message.UserID + ", " + message.DestinationID + ", \"" + message.Text + "\")");
-            _command.Connection.Close();
-        }
-
-        public void DeleteMessage(int messageID)
-        {
-            ExecuteNonQuery("DELETE FROM message WHERE id=" + messageID);
-        }
-
-        public void OldToOffline()
-        {
-            ExecuteNonQuery("UPDATE users SET online=false WHERE refreshtime < NOW() - 5");
+            ExecuteNonQuery("INSERT INTO messages (`userID`, `destinationID`, `message`) VALUES (" + message._userID + ", " + message._destinationID + ", \"" + message._text + "\")");
             _command.Connection.Close();
         }
     }
