@@ -35,5 +35,13 @@ namespace MessengerServiceLib
                 }
             }
         }
+
+        public string GetUserName(int userID)
+        {
+            using (var connection = new DataBase())
+            {
+                return connection.GetUserName(userID);
+            }
+        }
     }
 }

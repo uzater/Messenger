@@ -55,8 +55,8 @@ namespace MessengerServiceLib
         public int Login(string username)
         {
             var query = (IfUser(username))
-                ? "UPDATE users SET online=true, refreshtime=NOW() WHERE name=\"" + username + "\""
-                : "INSERT INTO users (`name`, `online`) VALUES (\"" + username + "\", true)";
+                ? "UPDATE users SET refreshtime = NOW() WHERE name=\"" + username + "\""
+                : "INSERT INTO users (`name`) VALUES (\"" + username + "\")";
             ExecuteNonQuery(query);
             _command.Connection.Close();
 
@@ -83,7 +83,7 @@ namespace MessengerServiceLib
             ExecuteReader("SELECT * FROM users");
 
             while (_reader.Read())
-                result.Add(new User(_reader.GetInt32(0), _reader.GetString(1), _reader.GetBoolean(2)));
+                result.Add(new User(_reader.GetInt32(0), _reader.GetString(1), true));
 
             _command.Connection.Close();
             return result;
@@ -105,10 +105,19 @@ namespace MessengerServiceLib
             ExecuteNonQuery("DELETE FROM message WHERE id=" + messageID);
         }
 
-        public void OldToOffline()
+        public string GetUserName(int userID)
         {
-            ExecuteNonQuery("UPDATE users SET online=false WHERE refreshtime < NOW() - 5");
+            ExecuteReader("SELECT name FROM users WHERE id=" + userID);
+
+            if (!_reader.Read())
+            {
+                _command.Connection.Close();
+                return "Error!";
+            }
+
+            var name = _reader.GetString(0);
             _command.Connection.Close();
+            return name;
         }
     }
 }

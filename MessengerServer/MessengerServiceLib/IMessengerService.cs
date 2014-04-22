@@ -14,5 +14,8 @@ namespace MessengerServiceLib
 
         [OperationContract]
         void SendMessage(Message message);
+
+        [OperationContract]
+        string GetUserName(int userID);
     }
 }

@@ -7,8 +7,6 @@ namespace MessengerServiceHost
 {
     internal class Program
     {
-        public static Timer Timer;
-
         private static void Main(string[] args)
         {
             Console.WriteLine("Messenger Server in running...");
@@ -17,22 +15,10 @@ namespace MessengerServiceHost
             {
                 serviceHost.Open();
 
-                Timer = new Timer(5000);
-                Timer.Elapsed += OnTimerElapsed;
-                Timer.Enabled = true;
-
                 Console.WriteLine();
                 Console.WriteLine("Messenger service is ready.");
                 Console.WriteLine("Press <Enter> to exit.");
                 Console.ReadLine();
-            }
-        }
-
-        private static void OnTimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            using (var connector = new DataBase())
-            {
-                connector.OldToOffline();
             }
         }
     }
