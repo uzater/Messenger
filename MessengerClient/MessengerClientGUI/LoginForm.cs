@@ -22,7 +22,7 @@ namespace MessengerClientGUI
         {
             using (var client = new MessengerServiceClient())
             {
-                _loggedUserId = client.Login(textBoxLoginName.Text);
+                _logedUserId = client.Login(textBoxLoginName.Text);
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
         }

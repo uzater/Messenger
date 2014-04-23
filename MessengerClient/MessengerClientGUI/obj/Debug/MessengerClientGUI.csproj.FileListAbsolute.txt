@@ -20,3 +20,10 @@ C:\Users\ASG\Desktop\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClien
 D:\Repository\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientGUI.exe.config
 D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.exe
 D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.pdb
+D:\Repository\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientGUI.exe
+D:\Repository\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientGUI.pdb
+D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.csprojResolveAssemblyReference.cache
+D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.LoginForm.resources
+D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.MessengerForm.resources
+D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.Properties.Resources.resources
+D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.csproj.GenerateResource.Cache

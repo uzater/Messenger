@@ -64,6 +64,12 @@
   <wsdl:message name="IMessengerService_GetUserName_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserNameResponse" />
   </wsdl:message>
+  <wsdl:message name="IMessengerService_GetMessages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessages" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_GetMessages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessagesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMessengerService">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/Login" message="tns:IMessengerService_Login_InputMessage" />
@@ -80,6 +86,10 @@
     <wsdl:operation name="GetUserName">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/GetUserName" message="tns:IMessengerService_GetUserName_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/GetUserNameResponse" message="tns:IMessengerService_GetUserName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/GetMessages" message="tns:IMessengerService_GetMessages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/GetMessagesResponse" message="tns:IMessengerService_GetMessages_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IMessengerService" type="tns:IMessengerService">
@@ -115,6 +125,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserName">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/GetUserName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/GetMessages" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -83,7 +83,7 @@ namespace MessengerServiceLib
             ExecuteReader("SELECT * FROM users");
 
             while (_reader.Read())
-                result.Add(new User(_reader.GetInt32(0), _reader.GetString(1), true));
+                result.Add(new User(_reader.GetInt32(0), _reader.GetString(1), (Int32)(DateTime.UtcNow.AddHours(4).Subtract(_reader.GetDateTime(2)).TotalSeconds) < 60));
 
             _command.Connection.Close();
             return result;
@@ -96,7 +96,7 @@ namespace MessengerServiceLib
 
         public void AddMessage(Message message)
         {
-            ExecuteNonQuery("INSERT INTO messages (`userID`, `destinationID`, `message`) VALUES (" + message.UserID + ", " + message.DestinationID + ", \"" + message.Text + "\")");
+            ExecuteNonQuery("INSERT INTO messages (`from`, `to`, `text`) VALUES (" + message.UserID + ", " + message.DestinationID + ", \"" + message.Text + "\")");
             _command.Connection.Close();
         }
 
@@ -118,6 +118,24 @@ namespace MessengerServiceLib
             var name = _reader.GetString(0);
             _command.Connection.Close();
             return name;
+        }
+
+        public IEnumerable<Message> GetMessages(int userId, int fromId)
+        {
+            ExecuteReader("SELECT `text`, `time` FROM messages WHERE `to`=" + userId + " AND `from`=" + fromId);
+
+            List<Message> messages = new List<Message>();
+
+            while (_reader.Read())
+            {
+                //TODO: norm time
+                messages.Add(new Message(userId, fromId, (Int32)_reader.GetDateTime(1).Ticks, _reader.GetString(0)));
+            }
+            _command.Connection.Close();
+
+            ExecuteNonQuery("DELETE FROM messages WHERE `to`=" + userId + " AND `from`=" + fromId);
+
+            return messages;
         }
     }
 }

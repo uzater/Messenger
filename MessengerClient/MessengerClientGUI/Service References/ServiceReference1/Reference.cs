@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Security.Cryptography;
+
 namespace MessengerClientGUI.ServiceReference1 {
     using System.Runtime.Serialization;
     using System;
@@ -100,8 +102,18 @@ namespace MessengerClientGUI.ServiceReference1 {
         
         private string TextField;
         
-        private int UserIDField;
+        private int TimeField;
         
+        private int UserIDField;
+
+        public Message(int logedUserId, int destinationId, int time, string text)
+        {
+            UserIDField = logedUserId;
+            DestinationIDField = destinationId;
+            TextField = text;
+            TimeField = time;
+        }
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -134,6 +146,19 @@ namespace MessengerClientGUI.ServiceReference1 {
                 if ((object.ReferenceEquals(this.TextField, value) != true)) {
                     this.TextField = value;
                     this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int Time {
+            get {
+                return this.TimeField;
+            }
+            set {
+                if ((this.TimeField.Equals(value) != true)) {
+                    this.TimeField = value;
+                    this.RaisePropertyChanged("Time");
                 }
             }
         }
@@ -188,6 +213,12 @@ namespace MessengerClientGUI.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUserName", ReplyAction="http://tempuri.org/IMessengerService/GetUserNameResponse")]
         System.Threading.Tasks.Task<string> GetUserNameAsync(int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetMessages", ReplyAction="http://tempuri.org/IMessengerService/GetMessagesResponse")]
+        MessengerClientGUI.ServiceReference1.Message[] GetMessages(int userID, int fromID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetMessages", ReplyAction="http://tempuri.org/IMessengerService/GetMessagesResponse")]
+        System.Threading.Tasks.Task<MessengerClientGUI.ServiceReference1.Message[]> GetMessagesAsync(int userID, int fromID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -247,6 +278,14 @@ namespace MessengerClientGUI.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> GetUserNameAsync(int userID) {
             return base.Channel.GetUserNameAsync(userID);
+        }
+        
+        public MessengerClientGUI.ServiceReference1.Message[] GetMessages(int userID, int fromID) {
+            return base.Channel.GetMessages(userID, fromID);
+        }
+        
+        public System.Threading.Tasks.Task<MessengerClientGUI.ServiceReference1.Message[]> GetMessagesAsync(int userID, int fromID) {
+            return base.Channel.GetMessagesAsync(userID, fromID);
         }
     }
 }

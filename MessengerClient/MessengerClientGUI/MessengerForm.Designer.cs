@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace MessengerClientGUI
 {
@@ -42,7 +43,7 @@ namespace MessengerClientGUI
             // 
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelName.Location = new System.Drawing.Point(611, 9);
+            this.labelName.Location = new System.Drawing.Point(611, 7);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(92, 20);
             this.labelName.TabIndex = 1;
@@ -51,7 +52,7 @@ namespace MessengerClientGUI
             // buttonLogout
             // 
             this.buttonLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonLogout.Location = new System.Drawing.Point(686, 32);
+            this.buttonLogout.Location = new System.Drawing.Point(611, 30);
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(88, 29);
             this.buttonLogout.TabIndex = 2;

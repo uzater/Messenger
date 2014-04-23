@@ -43,5 +43,13 @@ namespace MessengerServiceLib
                 return connection.GetUserName(userID);
             }
         }
+
+        public IEnumerable<Message> GetMessages(int userID, int fromID)
+        {
+            using (var connection = new DataBase())
+            {
+                return connection.GetMessages(userID, fromID);
+            }
+        }
     }
 }

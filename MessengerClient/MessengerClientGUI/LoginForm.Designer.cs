@@ -92,6 +92,6 @@ namespace MessengerClientGUI
         private System.Windows.Forms.TextBox textBoxLoginName;
         private System.Windows.Forms.Button buttonLogin;
 
-        public int _loggedUserId;
+        public int _logedUserId;
     }
 }
