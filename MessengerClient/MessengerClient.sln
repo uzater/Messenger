@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerClientGUI", "MessengerClientGUI\MessengerClientGUI.csproj", "{2CB2B755-E7AF-49BB-91EE-26386C8864A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerClientLib", "MessengerClientLib\MessengerClientLib.csproj", "{D99C3E01-E913-47BA-A45C-FF63F82A1ED6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerClientTests", "MessengerClientTests\MessengerClientTests.csproj", "{7BACD722-4CB4-43B3-992E-AB65EFAF5094}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2CB2B755-E7AF-49BB-91EE-26386C8864A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CB2B755-E7AF-49BB-91EE-26386C8864A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CB2B755-E7AF-49BB-91EE-26386C8864A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D99C3E01-E913-47BA-A45C-FF63F82A1ED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D99C3E01-E913-47BA-A45C-FF63F82A1ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D99C3E01-E913-47BA-A45C-FF63F82A1ED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D99C3E01-E913-47BA-A45C-FF63F82A1ED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BACD722-4CB4-43B3-992E-AB65EFAF5094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BACD722-4CB4-43B3-992E-AB65EFAF5094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BACD722-4CB4-43B3-992E-AB65EFAF5094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BACD722-4CB4-43B3-992E-AB65EFAF5094}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

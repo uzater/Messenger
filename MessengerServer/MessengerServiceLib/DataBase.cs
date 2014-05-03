@@ -52,7 +52,7 @@ namespace MessengerServiceLib
             return CheckUser("SELECT * FROM users WHERE id=\"" + id + "\"");
         }
 
-        public int Login(string username)
+        public User Login(string username)
         {
             var query = (IfUser(username))
                 ? "UPDATE users SET refreshtime = NOW() WHERE name=\"" + username + "\""
@@ -60,17 +60,17 @@ namespace MessengerServiceLib
             ExecuteNonQuery(query);
             _command.Connection.Close();
 
-            ExecuteReader("SELECT id FROM users WHERE name=\"" + username + "\"");
+            ExecuteReader("SELECT * FROM users WHERE name=\"" + username + "\"");
 
             if (!_reader.Read())
             {
                 _command.Connection.Close();
-                return -1;
+                return null;
             }
 
-            var id = _reader.GetInt32(0);
+            var user = new User(_reader.GetInt32(0), _reader.GetString(1), true);
             _command.Connection.Close();
-            return id;
+            return user;
         }
 
         public IEnumerable<User> GetUsers(int userID)

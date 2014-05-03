@@ -1,0 +1,5 @@
+D:\Repository\MessengerClient\MessengerClientTests\bin\Debug\MessengerClientTests.dll
+D:\Repository\MessengerClient\MessengerClientTests\bin\Debug\MessengerClientTests.pdb
+D:\Repository\MessengerClient\MessengerClientTests\obj\Debug\MessengerClientTests.csprojResolveAssemblyReference.cache
+D:\Repository\MessengerClient\MessengerClientTests\obj\Debug\MessengerClientTests.dll
+D:\Repository\MessengerClient\MessengerClientTests\obj\Debug\MessengerClientTests.pdb

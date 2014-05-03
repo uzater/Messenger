@@ -1,41 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MessengerClientGUI.ServiceReference1;
+using MessengerClientLib;
 
 namespace MessengerClientGUI
 {
-    public partial class LoginForm : Form
+    public partial class LoginForm : Form, ILoginForm
     {
+        public event EventHandler<LoginArgs> LoginAct;
+
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
-        {
-            using (var client = new MessengerServiceClient())
-            {
-                _logedUserId = client.Login(textBoxLoginName.Text);
-                DialogResult = System.Windows.Forms.DialogResult.OK;
-            }
-        }
-
         private void textBoxLoginName_TextChanged(object sender, EventArgs e)
         {
-            buttonLogin.Enabled = Text.Length != 0;
+            buttonLogin.Enabled = textBoxLoginName.Text != string.Empty;
         }
 
-        private void textBoxLoginName_KeyDown(object sender, KeyEventArgs e)
+        private void buttonLogin_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-                buttonLogin_Click(sender, e);
+            if(LoginAct != null)
+                LoginAct(sender, new LoginArgs(textBoxLoginName.Text));
         }
     }
 }

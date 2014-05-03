@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="Rsr3uagiscYozNbwCbGk4IpgJoo=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="ENstQ8I6enELAvOYPIC2PwIQP1o=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IMessengerService">
       <properties>
@@ -118,7 +118,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IMessengerService" contract="ServiceReference1.IMessengerService" bindingType="netTcpBinding" address="net.tcp://localhost:8080/MessengerService" bindingConfiguration="NetTcpBinding_IMessengerService">
+    <endpoint name="NetTcpBinding_IMessengerService" contract="MessengerServiceReference.IMessengerService" bindingType="netTcpBinding" address="net.tcp://localhost:8080/MessengerService" bindingConfiguration="NetTcpBinding_IMessengerService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8080/MessengerService</serializedValue>
@@ -133,7 +133,7 @@
           <serializedValue>NetTcpBinding_IMessengerService</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServiceReference1.IMessengerService</serializedValue>
+          <serializedValue>MessengerServiceReference.IMessengerService</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

@@ -7,7 +7,7 @@ namespace MessengerServiceLib
     public interface IMessengerService
     {
         [OperationContract]
-        int Login(string username);
+        User Login(string username);
 
         [OperationContract]
         IEnumerable<User> GetUsers(int userID);

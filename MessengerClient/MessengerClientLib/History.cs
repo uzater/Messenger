@@ -1,14 +1,14 @@
-﻿namespace MessengerClientGUI
+﻿namespace MessengerClientLib
 {
     public class History
     {
         public History(int userId, string text)
         {
-            UserID = userId;
+            UserId = userId;
             Text = text;
         }
 
-        public int UserID { get; private set; }
+        public int UserId { get; private set; }
         public string Text { get; set; }
     }
 }

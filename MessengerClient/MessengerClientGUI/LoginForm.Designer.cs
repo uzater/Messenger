@@ -54,7 +54,6 @@ namespace MessengerClientGUI
             this.textBoxLoginName.Size = new System.Drawing.Size(179, 26);
             this.textBoxLoginName.TabIndex = 1;
             this.textBoxLoginName.TextChanged += new System.EventHandler(this.textBoxLoginName_TextChanged);
-            this.textBoxLoginName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxLoginName_KeyDown);
             // 
             // buttonLogin
             // 
@@ -91,7 +90,5 @@ namespace MessengerClientGUI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxLoginName;
         private System.Windows.Forms.Button buttonLogin;
-
-        public int _logedUserId;
     }
 }

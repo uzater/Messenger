@@ -8,9 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Security.Cryptography;
-
-namespace MessengerClientGUI.ServiceReference1 {
+namespace MessengerClientLib.MessengerServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -105,15 +103,7 @@ namespace MessengerClientGUI.ServiceReference1 {
         private int TimeField;
         
         private int UserIDField;
-
-        public Message(int logedUserId, int destinationId, int time, string text)
-        {
-            UserIDField = logedUserId;
-            DestinationIDField = destinationId;
-            TextField = text;
-            TimeField = time;
-        }
-
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -187,26 +177,26 @@ namespace MessengerClientGUI.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IMessengerService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MessengerServiceReference.IMessengerService")]
     public interface IMessengerService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Login", ReplyAction="http://tempuri.org/IMessengerService/LoginResponse")]
-        int Login(string username);
+        MessengerClientLib.MessengerServiceReference.User Login(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Login", ReplyAction="http://tempuri.org/IMessengerService/LoginResponse")]
-        System.Threading.Tasks.Task<int> LoginAsync(string username);
+        System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.User> LoginAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUsers", ReplyAction="http://tempuri.org/IMessengerService/GetUsersResponse")]
-        MessengerClientGUI.ServiceReference1.User[] GetUsers(int userID);
+        MessengerClientLib.MessengerServiceReference.User[] GetUsers(int userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUsers", ReplyAction="http://tempuri.org/IMessengerService/GetUsersResponse")]
-        System.Threading.Tasks.Task<MessengerClientGUI.ServiceReference1.User[]> GetUsersAsync(int userID);
+        System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.User[]> GetUsersAsync(int userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/SendMessage", ReplyAction="http://tempuri.org/IMessengerService/SendMessageResponse")]
-        void SendMessage(MessengerClientGUI.ServiceReference1.Message message);
+        void SendMessage(MessengerClientLib.MessengerServiceReference.Message message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/SendMessage", ReplyAction="http://tempuri.org/IMessengerService/SendMessageResponse")]
-        System.Threading.Tasks.Task SendMessageAsync(MessengerClientGUI.ServiceReference1.Message message);
+        System.Threading.Tasks.Task SendMessageAsync(MessengerClientLib.MessengerServiceReference.Message message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUserName", ReplyAction="http://tempuri.org/IMessengerService/GetUserNameResponse")]
         string GetUserName(int userID);
@@ -215,19 +205,19 @@ namespace MessengerClientGUI.ServiceReference1 {
         System.Threading.Tasks.Task<string> GetUserNameAsync(int userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetMessages", ReplyAction="http://tempuri.org/IMessengerService/GetMessagesResponse")]
-        MessengerClientGUI.ServiceReference1.Message[] GetMessages(int userID, int fromID);
+        MessengerClientLib.MessengerServiceReference.Message[] GetMessages(int userID, int fromID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetMessages", ReplyAction="http://tempuri.org/IMessengerService/GetMessagesResponse")]
-        System.Threading.Tasks.Task<MessengerClientGUI.ServiceReference1.Message[]> GetMessagesAsync(int userID, int fromID);
+        System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.Message[]> GetMessagesAsync(int userID, int fromID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMessengerServiceChannel : MessengerClientGUI.ServiceReference1.IMessengerService, System.ServiceModel.IClientChannel {
+    public interface IMessengerServiceChannel : MessengerClientLib.MessengerServiceReference.IMessengerService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MessengerServiceClient : System.ServiceModel.ClientBase<MessengerClientGUI.ServiceReference1.IMessengerService>, MessengerClientGUI.ServiceReference1.IMessengerService {
+    public partial class MessengerServiceClient : System.ServiceModel.ClientBase<MessengerClientLib.MessengerServiceReference.IMessengerService>, MessengerClientLib.MessengerServiceReference.IMessengerService {
         
         public MessengerServiceClient() {
         }
@@ -248,27 +238,27 @@ namespace MessengerClientGUI.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public int Login(string username) {
+        public MessengerClientLib.MessengerServiceReference.User Login(string username) {
             return base.Channel.Login(username);
         }
         
-        public System.Threading.Tasks.Task<int> LoginAsync(string username) {
+        public System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.User> LoginAsync(string username) {
             return base.Channel.LoginAsync(username);
         }
         
-        public MessengerClientGUI.ServiceReference1.User[] GetUsers(int userID) {
+        public MessengerClientLib.MessengerServiceReference.User[] GetUsers(int userID) {
             return base.Channel.GetUsers(userID);
         }
         
-        public System.Threading.Tasks.Task<MessengerClientGUI.ServiceReference1.User[]> GetUsersAsync(int userID) {
+        public System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.User[]> GetUsersAsync(int userID) {
             return base.Channel.GetUsersAsync(userID);
         }
         
-        public void SendMessage(MessengerClientGUI.ServiceReference1.Message message) {
+        public void SendMessage(MessengerClientLib.MessengerServiceReference.Message message) {
             base.Channel.SendMessage(message);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(MessengerClientGUI.ServiceReference1.Message message) {
+        public System.Threading.Tasks.Task SendMessageAsync(MessengerClientLib.MessengerServiceReference.Message message) {
             return base.Channel.SendMessageAsync(message);
         }
         
@@ -280,11 +270,11 @@ namespace MessengerClientGUI.ServiceReference1 {
             return base.Channel.GetUserNameAsync(userID);
         }
         
-        public MessengerClientGUI.ServiceReference1.Message[] GetMessages(int userID, int fromID) {
+        public MessengerClientLib.MessengerServiceReference.Message[] GetMessages(int userID, int fromID) {
             return base.Channel.GetMessages(userID, fromID);
         }
         
-        public System.Threading.Tasks.Task<MessengerClientGUI.ServiceReference1.Message[]> GetMessagesAsync(int userID, int fromID) {
+        public System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.Message[]> GetMessagesAsync(int userID, int fromID) {
             return base.Channel.GetMessagesAsync(userID, fromID);
         }
     }

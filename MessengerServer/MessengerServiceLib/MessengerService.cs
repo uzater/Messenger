@@ -8,7 +8,7 @@ namespace MessengerServiceLib
 {
     public class MessengerService : IMessengerService
     {
-        public int Login(string username)
+        public User Login(string username)
         {
             using (var connection = new DataBase())
             {

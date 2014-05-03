@@ -31,23 +31,23 @@ namespace MessengerClientGUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelName = new System.Windows.Forms.Label();
+            this.LabelName = new System.Windows.Forms.Label();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.listBoxUsers = new System.Windows.Forms.ListBox();
             this.textBoxMessage = new System.Windows.Forms.TextBox();
-            this.buttonSendMessage = new System.Windows.Forms.Button();
-            this.richTextBoxMessages = new System.Windows.Forms.RichTextBox();
+            this.ButtonSendMessage = new System.Windows.Forms.Button();
+            this.RichTextBoxMessages = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // labelName
             // 
-            this.labelName.AutoSize = true;
-            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelName.Location = new System.Drawing.Point(611, 7);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(92, 20);
-            this.labelName.TabIndex = 1;
-            this.labelName.Text = "{userName}";
+            this.LabelName.AutoSize = true;
+            this.LabelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LabelName.Location = new System.Drawing.Point(611, 7);
+            this.LabelName.Name = "LabelName";
+            this.LabelName.Size = new System.Drawing.Size(92, 20);
+            this.LabelName.TabIndex = 1;
+            this.LabelName.Text = "{userName}";
             // 
             // buttonLogout
             // 
@@ -80,39 +80,37 @@ namespace MessengerClientGUI
             // 
             // buttonSendMessage
             // 
-            this.buttonSendMessage.Enabled = false;
-            this.buttonSendMessage.Location = new System.Drawing.Point(499, 471);
-            this.buttonSendMessage.Name = "buttonSendMessage";
-            this.buttonSendMessage.Size = new System.Drawing.Size(106, 23);
-            this.buttonSendMessage.TabIndex = 5;
-            this.buttonSendMessage.Text = "Отправить";
-            this.buttonSendMessage.UseVisualStyleBackColor = true;
-            this.buttonSendMessage.Click += new System.EventHandler(this.buttonSendMessage_Click);
+            this.ButtonSendMessage.Enabled = false;
+            this.ButtonSendMessage.Location = new System.Drawing.Point(499, 471);
+            this.ButtonSendMessage.Name = "ButtonSendMessage";
+            this.ButtonSendMessage.Size = new System.Drawing.Size(106, 23);
+            this.ButtonSendMessage.TabIndex = 5;
+            this.ButtonSendMessage.Text = "Отправить";
+            this.ButtonSendMessage.UseVisualStyleBackColor = true;
+            this.ButtonSendMessage.Click += new System.EventHandler(this.buttonSendMessage_Click);
             // 
             // richTextBoxMessages
             // 
-            this.richTextBoxMessages.Location = new System.Drawing.Point(5, 9);
-            this.richTextBoxMessages.Name = "richTextBoxMessages";
-            this.richTextBoxMessages.ReadOnly = true;
-            this.richTextBoxMessages.Size = new System.Drawing.Size(600, 455);
-            this.richTextBoxMessages.TabIndex = 6;
-            this.richTextBoxMessages.Text = "Выберите пользователя в списке справа\n";
+            this.RichTextBoxMessages.Location = new System.Drawing.Point(5, 9);
+            this.RichTextBoxMessages.Name = "RichTextBoxMessages";
+            this.RichTextBoxMessages.ReadOnly = true;
+            this.RichTextBoxMessages.Size = new System.Drawing.Size(600, 455);
+            this.RichTextBoxMessages.TabIndex = 6;
+            this.RichTextBoxMessages.Text = "Выберите пользователя в списке справа\n";
             // 
             // MessengerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 504);
-            this.Controls.Add(this.richTextBoxMessages);
-            this.Controls.Add(this.buttonSendMessage);
+            this.Controls.Add(this.RichTextBoxMessages);
+            this.Controls.Add(this.ButtonSendMessage);
             this.Controls.Add(this.textBoxMessage);
             this.Controls.Add(this.listBoxUsers);
             this.Controls.Add(this.buttonLogout);
-            this.Controls.Add(this.labelName);
+            this.Controls.Add(this.LabelName);
             this.Name = "MessengerForm";
             this.Text = "Messenger";
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.MessengerForm_Closing);
-            this.Load += new System.EventHandler(this.MessengerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,11 +118,8 @@ namespace MessengerClientGUI
 
         #endregion
 
-        private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Button buttonLogout;
         private System.Windows.Forms.ListBox listBoxUsers;
         private System.Windows.Forms.TextBox textBoxMessage;
-        private System.Windows.Forms.Button buttonSendMessage;
-        private System.Windows.Forms.RichTextBox richTextBoxMessages;
     }
 }
