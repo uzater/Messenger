@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace MessengerClientLib
 {
-    public interface IMessengerForm
+    public interface IMessengerForm: IView
     {
         Label LabelName { get; set; }
         ListBox ListBoxUsers { get; set; }

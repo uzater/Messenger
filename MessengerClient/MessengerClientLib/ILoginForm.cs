@@ -2,8 +2,8 @@
 
 namespace MessengerClientLib
 {
-    public interface ILoginForm
+    public interface ILoginForm: IView
     {
-        event EventHandler<LoginArgs> LoginAct; 
+        event EventHandler<LoginArgs> LoginAct;
     }
 }

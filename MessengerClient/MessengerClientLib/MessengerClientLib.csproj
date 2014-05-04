@@ -38,10 +38,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationController.cs" />
+    <Compile Include="BasePresenter.cs" />
     <Compile Include="History.cs" />
+    <Compile Include="IApplicationController.cs" />
+    <Compile Include="IContainer.cs" />
     <Compile Include="ILoginForm.cs" />
     <Compile Include="IMessengerForm.cs" />
+    <Compile Include="IPresenter.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="LoginArgs.cs" />
+    <Compile Include="LoginPresenter.cs" />
+    <Compile Include="MessengerPresenter.cs" />
     <Compile Include="Presenter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

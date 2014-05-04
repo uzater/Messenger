@@ -15,16 +15,12 @@ namespace MessengerClientGUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var loginForm = new LoginForm();
-            var messengerForm = new MessengerForm();
-            var presenter = new Presenter(loginForm, messengerForm);
+            var controller = new ApplicationController(new LightInjectAdapter())
+                           .RegisterView<ILoginForm, LoginForm>()
+                           .RegisterView<IMessengerForm, MessengerForm>()
+                           .RegisterInstance(new ApplicationContext());
 
-            loginForm.Closed += delegate
-            {
-                Application.Run(messengerForm);
-            };
-
-            Application.Run(loginForm);
+            controller.Run<LoginPresenter>();
         }
     }
 }

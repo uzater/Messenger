@@ -9,19 +9,15 @@ using Timer = System.Timers.Timer;
 
 namespace MessengerClientLib
 {
-    public class Presenter
+    public class MessengerPresenter: BasePresener<IMessengerForm, User>
     {
-        public Presenter(ILoginForm loginForm, IMessengerForm messengerForm)
+
+        public MessengerPresenter(IApplicationController controller, IMessengerForm view)
+            : base(controller, view)
         {
-            LoginForm = loginForm;
-            MessengerForm = messengerForm;
-
-            MessengerForm.SelectedIndexChangedAct += DoSelectedIndexChangedAct;
-            MessengerForm.SendMessageAct += DoSendMessage;
+            View.SelectedIndexChangedAct += DoSelectedIndexChangedAct;
+            View.SendMessageAct += DoSendMessage;
         }
-
-        private ILoginForm LoginForm { get; set; }
-        private IMessengerForm MessengerForm { get; set; }
 
         private User LoggedUser { get; set; }
         private User FocusedUser { get; set; }
@@ -32,18 +28,18 @@ namespace MessengerClientLib
 
         private void InitializeMessengerForm()
         {
-            MessengerForm.LabelName.Text = LoggedUser.Usernamek__BackingField;
+            View.LabelName.Text = LoggedUser.Usernamek__BackingField;
             FocusedUser = null;
             UserList = null;
 
-            RefreshUserList(this, null);
+            //RefreshUserList(this, null);
 
             Histories = new List<History>();
             if (UserList != null)
                 foreach (User user in UserList)
                     Histories.Add(new History(user.Idk__BackingField, "Chat with " + user.Usernamek__BackingField + "\n"));
 
-            Timer = new Timer {Interval = 1000};
+            Timer = new Timer { Interval = 1000 };
             Timer.Elapsed += RefreshUserList;
             Timer.Elapsed += GetNewMessages;
             Timer.Enabled = true;
@@ -65,29 +61,24 @@ namespace MessengerClientLib
 
             foreach (User user in UserList)
             {
-                //MessengerForm.ListBoxUsers.Invoke(
-                //    (MethodInvoker) (() => MessengerForm.ListBoxUsers.Items.Add(user.Usernamek__BackingField)));
-                MessengerForm.ListBoxUsers.Items.Add(user.Usernamek__BackingField);
+                View.ListBoxUsers.Invoke(
+                    (MethodInvoker) (() => View.ListBoxUsers.Items.Add(user.Usernamek__BackingField)));
+
             }
 
             if (FocusedUser != null)
-                //MessengerForm.ListBoxUsers.Invoke(
-                //    (MethodInvoker)
-                //        (() =>
-                //            MessengerForm.ListBoxUsers.SelectedIndex =
-                //                MessengerForm.ListBoxUsers.FindStringExact(
-                //                    UserList.First(u => u.Idk__BackingField == FocusedUser.Idk__BackingField).Usernamek__BackingField)));
-                MessengerForm.ListBoxUsers.SelectedIndex =
-                    MessengerForm.ListBoxUsers.FindStringExact(
-                        UserList.First(u => u.Idk__BackingField == FocusedUser.Idk__BackingField)
-                            .Usernamek__BackingField);
+                View.ListBoxUsers.Invoke(
+                    (MethodInvoker)
+                        (() =>
+                            View.ListBoxUsers.SelectedIndex =
+                                View.ListBoxUsers.FindStringExact(
+                                    UserList.First(u => u.Idk__BackingField == FocusedUser.Idk__BackingField).Usernamek__BackingField)));
         }
 
 
         private void ClearUserList()
         {
-            //MessengerForm.ListBoxUsers.Invoke((MethodInvoker) (() => MessengerForm.ListBoxUsers.Items.Clear()));
-            MessengerForm.ListBoxUsers.Items.Clear();
+            View.ListBoxUsers.Invoke((MethodInvoker) (() => View.ListBoxUsers.Items.Clear()));
         }
 
 
@@ -114,11 +105,11 @@ namespace MessengerClientLib
             if (Histories.All(h => h.UserId != FocusedUser.Idk__BackingField))
                 Histories.Add(new History(FocusedUser.Idk__BackingField, "Chat with " + curItem + "\n"));
 
-            MessengerForm.RichTextBoxMessages.Text = Histories.First(h => h.UserId == FocusedUser.Idk__BackingField).Text;
+            View.RichTextBoxMessages.Text = Histories.First(h => h.UserId == FocusedUser.Idk__BackingField).Text;
 
-            ((Form) MessengerForm).Text = "Messenger | " + curItem;
-            MessengerForm.TextBoxMessage.Enabled = true;
-            MessengerForm.ButtonSendMessage.Enabled = true;
+            ((Form)View).Text = "Messenger | " + curItem;
+            View.TextBoxMessage.Enabled = true;
+            View.ButtonSendMessage.Enabled = true;
         }
 
 
@@ -126,13 +117,13 @@ namespace MessengerClientLib
         {
             if (e.Message == "") return;
             Histories.First(h => h.UserId == FocusedUser.Idk__BackingField).Text += LoggedUser.Usernamek__BackingField + ": " + e.Message + "\n";
-            MessengerForm.RichTextBoxMessages.Text = Histories.First(h => h.UserId == FocusedUser.Idk__BackingField).Text;
+            View.RichTextBoxMessages.Text = Histories.First(h => h.UserId == FocusedUser.Idk__BackingField).Text;
 
             var message = new Message
             {
                 UserID = LoggedUser.Idk__BackingField,
                 DestinationID = FocusedUser.Idk__BackingField,
-                Time = (Int32) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds,
+                Time = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds,
                 Text = e.Message
             };
 
@@ -141,10 +132,17 @@ namespace MessengerClientLib
                 client.SendMessage(message);
             }
 
-            MessengerForm.TextBoxMessage.Clear();
+            View.TextBoxMessage.Clear();
 
-            MessengerForm.RichTextBoxMessages.SelectionStart = MessengerForm.RichTextBoxMessages.TextLength;
-            MessengerForm.RichTextBoxMessages.ScrollToCaret();
+            View.RichTextBoxMessages.SelectionStart = View.RichTextBoxMessages.TextLength;
+            View.RichTextBoxMessages.ScrollToCaret();
+        }
+
+        public override void Run(User argument)
+        {
+            LoggedUser = argument;
+            InitializeMessengerForm();
+            View.Show();
         }
     }
 }

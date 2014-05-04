@@ -7,10 +7,17 @@ namespace MessengerClientGUI
     public partial class LoginForm : Form, ILoginForm
     {
         public event EventHandler<LoginArgs> LoginAct;
-
-        public LoginForm()
+        private readonly ApplicationContext _context;
+        public LoginForm(ApplicationContext context)
         {
+            _context = context;
             InitializeComponent();
+        }
+
+        public new void Show()
+        {
+            _context.MainForm = this;
+            Application.Run(_context);
         }
 
         private void textBoxLoginName_TextChanged(object sender, EventArgs e)

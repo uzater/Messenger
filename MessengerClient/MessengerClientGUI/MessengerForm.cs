@@ -6,9 +6,17 @@ namespace MessengerClientGUI
 {
     public partial class MessengerForm : Form, IMessengerForm
     {
-        public MessengerForm()
+        private readonly ApplicationContext _context;
+        public MessengerForm(ApplicationContext context)
         {
+            _context = context;
             InitializeComponent();
+        }
+
+        public new void Show()
+        {
+            _context.MainForm = this;
+            base.Show();
         }
 
         public event EventHandler<SelectedIndexChangedArgs> SelectedIndexChangedAct;

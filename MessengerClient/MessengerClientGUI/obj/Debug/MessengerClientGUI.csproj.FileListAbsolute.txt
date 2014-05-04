@@ -29,3 +29,5 @@ D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.Pr
 D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.csproj.GenerateResource.Cache
 D:\Repository\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientLib.dll
 D:\Repository\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientLib.pdb
+D:\Repository\MessengerClient\MessengerClientGUI\bin\Debug\LightInject.dll
+D:\Repository\MessengerClient\MessengerClientGUI\bin\Debug\nunit.framework.dll
