@@ -9,6 +9,11 @@ namespace MessengerServiceHost
     {
         private static void Main(string[] args)
         {
+            DataBaseConnection.DBName = "Messenger";
+            DataBaseConnection.DBHost = "localhost";
+            DataBaseConnection.DBUser = "root";
+            DataBaseConnection.DBPass = "pass";
+
             Console.WriteLine("Messenger Server in running...");
 
             using (var serviceHost = new ServiceHost(typeof (MessengerService)))

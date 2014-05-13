@@ -38,6 +38,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
+    <Compile Include="DataBaseConnection.cs" />
+    <Compile Include="DataBaseQuery.cs" />
+    <Compile Include="DataBaseResult.cs" />
     <Compile Include="IMessengerService.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessengerService.cs" />

@@ -6,3 +6,11 @@ D:\Repository\MessengerServer\MessengerServiceHost\bin\Debug\MessengerServiceLib
 D:\Repository\MessengerServer\MessengerServiceHost\obj\Debug\MessengerServiceHost.csprojResolveAssemblyReference.cache
 D:\Repository\MessengerServer\MessengerServiceHost\obj\Debug\MessengerServiceHost.exe
 D:\Repository\MessengerServer\MessengerServiceHost\obj\Debug\MessengerServiceHost.pdb
+D:\Repository\Messenger\MessengerServer\MessengerServiceHost\bin\Debug\MessengerServiceHost.exe.config
+D:\Repository\Messenger\MessengerServer\MessengerServiceHost\obj\Debug\MessengerServiceHost.exe
+D:\Repository\Messenger\MessengerServer\MessengerServiceHost\obj\Debug\MessengerServiceHost.pdb
+D:\Repository\Messenger\MessengerServer\MessengerServiceHost\obj\Debug\MessengerServiceHost.csprojResolveAssemblyReference.cache
+D:\Repository\Messenger\MessengerServer\MessengerServiceHost\bin\Debug\MessengerServiceHost.exe
+D:\Repository\Messenger\MessengerServer\MessengerServiceHost\bin\Debug\MessengerServiceHost.pdb
+D:\Repository\Messenger\MessengerServer\MessengerServiceHost\bin\Debug\MessengerServiceLib.dll
+D:\Repository\Messenger\MessengerServer\MessengerServiceHost\bin\Debug\MessengerServiceLib.pdb
