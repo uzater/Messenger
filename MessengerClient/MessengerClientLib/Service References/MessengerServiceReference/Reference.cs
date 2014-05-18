@@ -96,13 +96,13 @@ namespace MessengerClientLib.MessengerServiceReference {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private int DestinationIDField;
+        private int RecieverIdField;
+        
+        private int SenderIdField;
         
         private string TextField;
         
         private int TimeField;
-        
-        private int UserIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -115,14 +115,27 @@ namespace MessengerClientLib.MessengerServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public int DestinationID {
+        public int RecieverId {
             get {
-                return this.DestinationIDField;
+                return this.RecieverIdField;
             }
             set {
-                if ((this.DestinationIDField.Equals(value) != true)) {
-                    this.DestinationIDField = value;
-                    this.RaisePropertyChanged("DestinationID");
+                if ((this.RecieverIdField.Equals(value) != true)) {
+                    this.RecieverIdField = value;
+                    this.RaisePropertyChanged("RecieverId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int SenderId {
+            get {
+                return this.SenderIdField;
+            }
+            set {
+                if ((this.SenderIdField.Equals(value) != true)) {
+                    this.SenderIdField = value;
+                    this.RaisePropertyChanged("SenderId");
                 }
             }
         }
@@ -149,19 +162,6 @@ namespace MessengerClientLib.MessengerServiceReference {
                 if ((this.TimeField.Equals(value) != true)) {
                     this.TimeField = value;
                     this.RaisePropertyChanged("Time");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public int UserID {
-            get {
-                return this.UserIDField;
-            }
-            set {
-                if ((this.UserIDField.Equals(value) != true)) {
-                    this.UserIDField = value;
-                    this.RaisePropertyChanged("UserID");
                 }
             }
         }
@@ -199,16 +199,16 @@ namespace MessengerClientLib.MessengerServiceReference {
         System.Threading.Tasks.Task SendMessageAsync(MessengerClientLib.MessengerServiceReference.Message message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUserName", ReplyAction="http://tempuri.org/IMessengerService/GetUserNameResponse")]
-        string GetUserName(int userID);
+        string GetUserName(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUserName", ReplyAction="http://tempuri.org/IMessengerService/GetUserNameResponse")]
-        System.Threading.Tasks.Task<string> GetUserNameAsync(int userID);
+        System.Threading.Tasks.Task<string> GetUserNameAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetMessages", ReplyAction="http://tempuri.org/IMessengerService/GetMessagesResponse")]
-        MessengerClientLib.MessengerServiceReference.Message[] GetMessages(int userID, int fromID);
+        MessengerClientLib.MessengerServiceReference.Message[] GetMessages(int senderId, int recieverId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetMessages", ReplyAction="http://tempuri.org/IMessengerService/GetMessagesResponse")]
-        System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.Message[]> GetMessagesAsync(int userID, int fromID);
+        System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.Message[]> GetMessagesAsync(int senderId, int recieverId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -262,20 +262,20 @@ namespace MessengerClientLib.MessengerServiceReference {
             return base.Channel.SendMessageAsync(message);
         }
         
-        public string GetUserName(int userID) {
-            return base.Channel.GetUserName(userID);
+        public string GetUserName(int userId) {
+            return base.Channel.GetUserName(userId);
         }
         
-        public System.Threading.Tasks.Task<string> GetUserNameAsync(int userID) {
-            return base.Channel.GetUserNameAsync(userID);
+        public System.Threading.Tasks.Task<string> GetUserNameAsync(int userId) {
+            return base.Channel.GetUserNameAsync(userId);
         }
         
-        public MessengerClientLib.MessengerServiceReference.Message[] GetMessages(int userID, int fromID) {
-            return base.Channel.GetMessages(userID, fromID);
+        public MessengerClientLib.MessengerServiceReference.Message[] GetMessages(int senderId, int recieverId) {
+            return base.Channel.GetMessages(senderId, recieverId);
         }
         
-        public System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.Message[]> GetMessagesAsync(int userID, int fromID) {
-            return base.Channel.GetMessagesAsync(userID, fromID);
+        public System.Threading.Tasks.Task<MessengerClientLib.MessengerServiceReference.Message[]> GetMessagesAsync(int senderId, int recieverId) {
+            return base.Channel.GetMessagesAsync(senderId, recieverId);
         }
     }
 }

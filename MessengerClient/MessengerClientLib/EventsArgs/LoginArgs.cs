@@ -1,4 +1,4 @@
-﻿namespace MessengerClientLib
+﻿namespace MessengerClientLib.EventsArgs
 {
     public class LoginArgs
     {

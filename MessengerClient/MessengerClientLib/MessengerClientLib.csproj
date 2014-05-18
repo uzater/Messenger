@@ -30,36 +30,41 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LightInject">
+      <HintPath>..\Libs\LightInject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationController.cs" />
-    <Compile Include="BasePresenter.cs" />
+    <Compile Include="ApplicationController\ApplicationController.cs" />
+    <Compile Include="Presenters\BasePresenter.cs" />
     <Compile Include="History.cs" />
-    <Compile Include="IApplicationController.cs" />
-    <Compile Include="IContainer.cs" />
-    <Compile Include="ILoginForm.cs" />
-    <Compile Include="IMessengerForm.cs" />
-    <Compile Include="IPresenter.cs" />
-    <Compile Include="IView.cs" />
-    <Compile Include="LoginArgs.cs" />
-    <Compile Include="LoginPresenter.cs" />
-    <Compile Include="MessengerPresenter.cs" />
-    <Compile Include="Presenter.cs" />
+    <Compile Include="Interfaces\IApplicationController.cs" />
+    <Compile Include="Interfaces\IContainer.cs" />
+    <Compile Include="Interfaces\IMessengerForm.cs" />
+    <Compile Include="Interfaces\ILoginForm.cs" />
+    <Compile Include="Interfaces\IPresenter.cs" />
+    <Compile Include="Interfaces\IView.cs" />
+    <Compile Include="EventsArgs\LoginArgs.cs" />
+    <Compile Include="ApplicationController\LightInjectAdapter.cs" />
+    <Compile Include="Presenters\LoginPresenter.cs" />
+    <Compile Include="Presenters\MessengerPresenter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectedIndexChangedArgs.cs" />
-    <Compile Include="SendMessageArgs.cs" />
+    <Compile Include="EventsArgs\SelectedIndexChangedArgs.cs" />
+    <Compile Include="EventsArgs\SendMessageArgs.cs" />
     <Compile Include="Service References\MessengerServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ShowedUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -97,6 +102,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

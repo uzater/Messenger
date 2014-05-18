@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Windows.Forms;
 using MessengerClientLib;
+using MessengerClientLib.Interfaces;
 
 namespace MessengerClientGUI
 {
-    public partial class MessengerForm : Form, IMessengerForm
+    public sealed partial class MessengerForm : Form, IMessengerForm
     {
         private readonly ApplicationContext _context;
         public MessengerForm(ApplicationContext context)
         {
+            DoubleBuffered = true;
             _context = context;
             InitializeComponent();
         }
@@ -22,7 +24,12 @@ namespace MessengerClientGUI
         public event EventHandler<SelectedIndexChangedArgs> SelectedIndexChangedAct;
         public event EventHandler<SendMessageArgs> SendMessageAct;
 
-        public Label LabelName { get; set; }
+// ReSharper disable once ConvertToAutoProperty
+        public Label LabelName
+        {
+            get { return labelName; }
+            set { labelName = value; }
+        }
 
         public ListBox ListBoxUsers
         {
@@ -36,9 +43,19 @@ namespace MessengerClientGUI
             set { textBoxMessage = value; }
         }
 
-        public Button ButtonSendMessage { get; set; }
+// ReSharper disable once ConvertToAutoProperty
+        public Button ButtonSendMessage
+        {
+            get { return buttonSendMessage; }
+            set { buttonSendMessage = value; }
+        }
 
-        public RichTextBox RichTextBoxMessages { get; set; }
+// ReSharper disable once ConvertToAutoProperty
+        public RichTextBox RichTextBoxMessages
+        {
+            get { return richTextBoxMessages; }
+            set { richTextBoxMessages = value; }
+        }
 
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -49,7 +66,7 @@ namespace MessengerClientGUI
         private void listBoxUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SelectedIndexChangedAct != null)
-                SelectedIndexChangedAct(this, new SelectedIndexChangedArgs(listBoxUsers.SelectedItem.ToString()));
+                SelectedIndexChangedAct(this, new SelectedIndexChangedArgs(listBoxUsers.SelectedIndex));
         }
 
         private void buttonSendMessage_Click(object sender, EventArgs e)

@@ -1,14 +1,22 @@
-﻿namespace MessengerClientLib
+﻿using MessengerClientLib.MessengerServiceReference;
+
+namespace MessengerClientLib
 {
     public class History
     {
-        public History(int userId, string text)
+        public History(User user)
         {
-            UserId = userId;
-            Text = text;
+            User = user;
+
+            Text = "Chat with " + User.Usernamek__BackingField + "\n";
         }
 
-        public int UserId { get; private set; }
-        public string Text { get; set; }
+        public User User { get; private set; }
+        public string Text { get; private set; }
+
+        public void Add(Message message)
+        {
+            Text += message.SenderId + "(" + message.Time + "): " + message.Text + "\n";
+        }
     }
 }

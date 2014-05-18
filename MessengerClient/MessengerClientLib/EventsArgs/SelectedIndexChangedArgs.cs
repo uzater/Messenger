@@ -2,10 +2,12 @@
 {
     public class SelectedIndexChangedArgs
     {
-        public SelectedIndexChangedArgs(string username)
+        public SelectedIndexChangedArgs(int position)
         {
-            Username = username;
+            Position = position;
         }
+
+        public int Position { get; set; }
 
         public string Username { get; set; }
     }

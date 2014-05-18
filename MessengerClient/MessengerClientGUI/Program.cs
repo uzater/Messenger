@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using MessengerClientLib;
+using MessengerClientLib.ApplicationController;
+using MessengerClientLib.Interfaces;
+using MessengerClientLib.Presenters;
 
 namespace MessengerClientGUI
 {
