@@ -16,7 +16,12 @@ namespace MessengerClientLib
 
         public void Add(Message message)
         {
-            Text += message.SenderId + "(" + message.Time + "): " + message.Text + "\n";
+            Text += User.Usernamek__BackingField + " (" + message.Time + "): " + message.Text + "\n";
+        }
+
+        public void Add(Message message, string loggedUserName)
+        {
+            Text += loggedUserName + " (" + message.Time + "): " + message.Text + "\n";
         }
     }
 }

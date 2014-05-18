@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MessengerServiceLib
@@ -21,7 +22,7 @@ namespace MessengerServiceLib
         public void SendMessage(Message message)
         {
             var connection = new DataBase();
-            if (connection.IfUser(message.UserID) && connection.IfUser(message.DestinationID))
+            if (connection.IfUser(message.SenderId) && connection.IfUser(message.RecieverId))
                 connection.AddMessage(message);
         }
 
@@ -31,10 +32,10 @@ namespace MessengerServiceLib
             return connection.GetUserName(userID);
         }
 
-        public IEnumerable<Message> GetMessages(int userID, int fromID)
+        public IEnumerable<Message> GetMessages(int sender, int reciever)
         {
             var connection = new DataBase();
-            return connection.GetMessages(userID, fromID);
+            return connection.GetMessages(sender, reciever);
         }
     }
 }

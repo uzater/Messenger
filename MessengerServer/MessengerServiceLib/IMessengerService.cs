@@ -19,6 +19,6 @@ namespace MessengerServiceLib
         string GetUserName(int userID);
 
         [OperationContract]
-        IEnumerable<Message> GetMessages(int userID, int fromID);
+        IEnumerable<Message> GetMessages(int sender, int reciever);
     }
 }

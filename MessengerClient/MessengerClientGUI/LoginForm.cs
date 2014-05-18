@@ -31,5 +31,12 @@ namespace MessengerClientGUI
             if(LoginAct != null)
                 LoginAct(sender, new LoginArgs(textBoxLoginName.Text));
         }
+        private void textBoxLoginName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && LoginAct != null)
+            {
+                LoginAct(sender, new LoginArgs(textBoxLoginName.Text));
+            }
+        }
     }
 }

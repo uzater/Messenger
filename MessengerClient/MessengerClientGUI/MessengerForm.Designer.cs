@@ -65,11 +65,13 @@ namespace MessengerClientGUI
             // 
             // listBoxUsers
             // 
+            this.listBoxUsers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBoxUsers.FormattingEnabled = true;
             this.listBoxUsers.Location = new System.Drawing.Point(615, 72);
             this.listBoxUsers.Name = "listBoxUsers";
             this.listBoxUsers.Size = new System.Drawing.Size(158, 420);
             this.listBoxUsers.TabIndex = 3;
+            this.listBoxUsers.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxUsers_DrawItem);
             this.listBoxUsers.SelectedIndexChanged += new System.EventHandler(this.listBoxUsers_SelectedIndexChanged);
             // 
             // textBoxMessage

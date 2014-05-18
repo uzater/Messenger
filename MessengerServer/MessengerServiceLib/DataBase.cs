@@ -36,9 +36,9 @@ namespace MessengerServiceLib
             return !result.Readable ? null : new User((int)result.DataResult[0][0], (string)result.DataResult[0][1], true);
         }
 
-        public IEnumerable<User> GetUsers(int userID)
+        public IEnumerable<User> GetUsers(int userId)
         {
-            if (!IfUser(userID))
+            if (!IfUser(userId))
                 return null;
 
             var dbquery = new DataBaseQuery();
@@ -51,31 +51,30 @@ namespace MessengerServiceLib
         public void AddMessage(Message message)
         {
             var dbquery = new DataBaseQuery();
-            dbquery.Execute("INSERT INTO messages (`from`, `to`, `text`) VALUES (" + message.UserID + ", " + message.DestinationID + ", \"" + message.Text + "\")");
+            dbquery.Execute("INSERT INTO messages (`sender`, `reciever`, `text`) VALUES (" + message.SenderId + ", " + message.RecieverId + ", \"" + message.Text + "\")");
         }
 
-        public void DeleteMessage(int messageID)
+        public void DeleteMessage(int messageId)
         {
             var dbquery = new DataBaseQuery();
-            dbquery.Execute("DELETE FROM message WHERE id=" + messageID);
+            dbquery.Execute("DELETE FROM message WHERE id=" + messageId);
         }
 
-        public string GetUserName(int userID)
+        public string GetUserName(int userId)
         {
             var dbquery = new DataBaseQuery();
-            var result = dbquery.Execute("SELECT name FROM users WHERE id=" + userID);
+            var result = dbquery.Execute("SELECT name FROM users WHERE id=" + userId);
 
             return (!result.Readable) ? "ЕГГОГ!" : (string)result.DataResult[0][0];
         }
 
-        public IEnumerable<Message> GetMessages(int userId, int fromId)
+        public IEnumerable<Message> GetMessages(int sender, int reciever)
         {
             var dbquery = new DataBaseQuery();
-            var result = dbquery.Execute("SELECT `time`, `text` FROM messages WHERE `to`=" + userId + " AND `from`=" + fromId);
-            //TODO: time!!!
-            var messages = result.DataResult.Select(message => new Message(userId, fromId, (int) 0, (string) message[1])).ToList();
+            var result = dbquery.Execute("SELECT `time`, `text` FROM messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
+            var messages = result.DataResult.Select(message => new Message(sender, reciever, (DateTime)message[0], (string) message[1])).ToList();
 
-            dbquery.Execute("DELETE FROM messages WHERE `to`=" + userId + " AND `from`=" + fromId);
+            dbquery.Execute("DELETE FROM messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
 
             return messages;
         }

@@ -5,15 +5,15 @@ namespace MessengerServiceLib
     [Serializable]
     public class Message
     {
-        public readonly int UserID;
-        public readonly int DestinationID;
-        public readonly int Time;
+        public readonly int SenderId;
+        public readonly int RecieverId;
+        public readonly DateTime Time;
         public readonly string Text;
 
-        public Message(int userID, int destinationID, int time, string text)
+        public Message(int senderId, int recieverId, DateTime time, string text)
         {
-            UserID = userID;
-            DestinationID = destinationID;
+            SenderId = senderId;
+            RecieverId = recieverId;
             Time = time;
             Text = text;
         }

@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Timers;
 using System.Windows.Forms;
 using MessengerClientLib.Interfaces;
 using MessengerClientLib.MessengerServiceReference;
 using Message = MessengerClientLib.MessengerServiceReference.Message;
-using Timer = System.Timers.Timer;
+using Timer = System.Windows.Forms.Timer;
 
 namespace MessengerClientLib.Presenters
 {
@@ -19,8 +20,8 @@ namespace MessengerClientLib.Presenters
             View.SendMessageAct += DoSendMessage;
         }
 
-        public List<User> UserList;
-        private User LoggedUser { get; set; }
+        public List<ShowedUser> ShowedUserList;
+        private static User LoggedUser { get; set; }
         private User FocusedUser { get; set; }
         private List<Message> Messages { get; set; }
         private List<History> Histories { get; set; }
@@ -30,19 +31,19 @@ namespace MessengerClientLib.Presenters
         {
             View.LabelName.Text = LoggedUser.Usernamek__BackingField;
             FocusedUser = null;
-            UserList = new List<User>();
+            ShowedUserList = new List<ShowedUser>();
 
             Histories = new List<History>();
 
             Messages = new List<Message>();
 
-            if (UserList != null)
-                foreach (User user in UserList)
+            if (ShowedUserList != null)
+                foreach (ShowedUser user in ShowedUserList)
                     Histories.Add(new History(user));
 
-            Timer = new Timer { Interval = 1000 };
-            Timer.Elapsed += RefreshUserList;
-            Timer.Elapsed += GetNewMessages;
+            Timer = new Timer {Interval = 1000};
+            Timer.Tick += RefreshUserList;
+            Timer.Tick += GetNewMessages;
             Timer.Enabled = true;
         }
 
@@ -50,54 +51,68 @@ namespace MessengerClientLib.Presenters
         {
             using (var client = new MessengerServiceClient())
             {
-                UserList = client.GetUsers(LoggedUser.Idk__BackingField).ToList();
+                ShowedUserList = client.GetUsers(LoggedUser.Idk__BackingField).ToList().Select(ShowedUser.From).ToList();
             }
         }
 
-        private void RefreshUserList(object sender, ElapsedEventArgs e)
+        private void RefreshUserList(object sender, EventArgs e)
         {
-            View.ListBoxUsers.Invoke((MethodInvoker) (() => View.ListBoxUsers.BeginUpdate()));
+            //View.ListBoxUsers.Invoke((MethodInvoker) (() => View.ListBoxUsers.BeginUpdate()));
+            View.ListBoxUsers.BeginUpdate();
 
             GetUsers();
 
             ClearUserList();
 
-            foreach (User user in UserList)
+            foreach (ShowedUser user in ShowedUserList)
             {
-                int countofNewMessages = (Messages != null) ? (Messages.Where(m => m.SenderId == user.Idk__BackingField).ToList()).Count : 0;
-                View.ListBoxUsers.Invoke(
-                    (MethodInvoker) (() => View.ListBoxUsers.Items.Add(((user.Onlinek__BackingField) ? "*" : "") + user.Usernamek__BackingField + ((countofNewMessages != 0) ? (" (" + countofNewMessages + ")") : ""))));
+                int countofNewMessages = (Messages != null)
+                    ? (Messages.Where(m => m.SenderId == user.Idk__BackingField).ToList()).Count
+                    : 0;
+                //View.ListBoxUsers.Invoke(
+                //    (MethodInvoker) (() => View.ListBoxUsers.Items.Add(((user.Onlinek__BackingField) ? "*" : "") + user.Usernamek__BackingField + ((countofNewMessages != 0) ? (" (" + countofNewMessages + ")") : ""))));
 
+                //View.ListBoxUsers.Font = user.Onlinek__BackingField ? new Font(View.ListBoxUsers.Font, FontStyle.Bold) : new Font(View.ListBoxUsers.Font, FontStyle.Regular);
+
+                View.ListBoxUsers.Items.Add(((user.Onlinek__BackingField) ? "*" : "") + user.Usernamek__BackingField +
+                                            ((countofNewMessages != 0) ? (" (" + countofNewMessages + ")") : ""));
+                //View.ListBoxUsers.Fo
             }
-
+            //if (FocusedUser != null)
+            //    View.ListBoxUsers.Invoke(
+            //        (MethodInvoker)
+            //            (() =>
+            //                View.ListBoxUsers.SelectedIndex = ShowedUserList.FindIndex(u => u.Idk__BackingField == FocusedUser.Idk__BackingField)));
             if (FocusedUser != null)
-                View.ListBoxUsers.Invoke(
-                    (MethodInvoker)
-                        (() =>
-                            View.ListBoxUsers.SelectedIndex = UserList.FindIndex(u => u.Idk__BackingField == FocusedUser.Idk__BackingField)));
+                View.ListBoxUsers.SelectedIndex =
+                    ShowedUserList.FindIndex(u => u.Idk__BackingField == FocusedUser.Idk__BackingField);
 
-            View.ListBoxUsers.Invoke((MethodInvoker)(() => View.ListBoxUsers.EndUpdate()));
+            //View.ListBoxUsers.Invoke((MethodInvoker)(() => View.ListBoxUsers.EndUpdate()));
+            View.ListBoxUsers.EndUpdate();
         }
 
 
         private void ClearUserList()
         {
-            View.ListBoxUsers.Invoke((MethodInvoker) (() => View.ListBoxUsers.Items.Clear()));
+            //View.ListBoxUsers.Invoke((MethodInvoker) (() => View.ListBoxUsers.Items.Clear()));
+            View.ListBoxUsers.Items.Clear();
         }
 
 
-        private void GetNewMessages(object sender, ElapsedEventArgs e)
+        private void GetNewMessages(object sender, EventArgs eventArgs)
         {
             using (var client = new MessengerServiceClient())
             {
-                foreach (User user in UserList)
+                foreach (ShowedUser user in ShowedUserList)
+                {
                     Messages.AddRange(client.GetMessages(user.Idk__BackingField, LoggedUser.Idk__BackingField).ToList());
+                }
             }
         }
 
         private void DoSelectedIndexChangedAct(object sender, SelectedIndexChangedArgs e)
         {
-            FocusedUser = UserList[e.Position];
+            FocusedUser = ShowedUserList[e.Position];
 
             if (Histories.All(h => h.User.Idk__BackingField != FocusedUser.Idk__BackingField))
                 Histories.Add(new History(FocusedUser));
@@ -129,12 +144,12 @@ namespace MessengerClientLib.Presenters
             {
                 SenderId = LoggedUser.Idk__BackingField,
                 RecieverId = FocusedUser.Idk__BackingField,
-                Time = (int)System.Diagnostics.Stopwatch.GetTimestamp(),
+                Time = DateTime.Now,
                 Text = e.Message
             };
 
             var currentHistory = Histories.First(h => h.User.Idk__BackingField == FocusedUser.Idk__BackingField);
-            currentHistory.Add(message);
+            currentHistory.Add(message, LoggedUser.Usernamek__BackingField);
             View.RichTextBoxMessages.Text = currentHistory.Text;
 
             using (var client = new MessengerServiceClient())
