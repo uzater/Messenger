@@ -1,18 +1,22 @@
 ﻿using System;
 using System.ServiceModel;
 using MessengerServiceLib;
-using System.Timers;
+using MessengerServiceLib.DataBase;
 
 namespace MessengerServiceHost
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
+            #region Data Base configuration
+
             DataBaseConnection.DBName = "Messenger";
             DataBaseConnection.DBHost = "localhost";
             DataBaseConnection.DBUser = "root";
             DataBaseConnection.DBPass = "pass";
+
+            #endregion
 
             Console.WriteLine("Messenger Server in running...");
 

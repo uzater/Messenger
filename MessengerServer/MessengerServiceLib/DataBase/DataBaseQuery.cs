@@ -1,10 +1,18 @@
 ﻿using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
-namespace MessengerServiceLib
+namespace MessengerServiceLib.DataBase
 {
-    public class DataBaseQuery
+    /// <summary>
+    /// Класс для взаимодействия с базой данных
+    /// </summary>
+    public class DataBaseQuery : IExecutor
     {
+        /// <summary>
+        /// Отправка запроса к базе данных
+        /// </summary>
+        /// <param name="query">Строка запроса</param>
+        /// <returns>Результат запроса</returns>
         public DataBaseResult Execute(string query)
         {
             var command = new MySqlCommand
