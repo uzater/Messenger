@@ -32,7 +32,7 @@ namespace MessengerServiceLib.DataBase
         /// <returns>TRUE, если пользователь существует, иначе FALSE</returns>
         public bool IfUser(string username)
         {
-            return CheckUser("SELECT * FROM users WHERE name=\"" + username + "\"");
+            return CheckUser("SELECT * FROM users WHERE name='" + username + "'");
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace MessengerServiceLib.DataBase
         /// <returns>TRUE, если пользователь существует, иначе FALSE</returns>
         public bool IfUser(int id)
         {
-            return CheckUser("SELECT * FROM users WHERE id=\"" + id + "\"");
+            return CheckUser("SELECT * FROM users WHERE id='" + id + "'");
         }
 
         /// <summary>
@@ -53,11 +53,11 @@ namespace MessengerServiceLib.DataBase
         public User Login(string username)
         {
             var query = (IfUser(username))
-                ? "UPDATE users SET refreshtime = NOW() WHERE name=\"" + username + "\""
-                : "INSERT INTO users (`name`) VALUES (\"" + username + "\")";
+                ? "UPDATE users SET refreshtime = NOW() WHERE name='" + username + "'"
+                : "INSERT INTO users ('name') VALUES ('" + username + "')";
             DBquery.Execute(query);
 
-            var result = DBquery.Execute("SELECT * FROM users WHERE name=\"" + username + "\"");
+            var result = DBquery.Execute("SELECT * FROM users WHERE name='" + username + "'");
 
             return !result.Readable ? null : new User((int)result.DataResult[0][0], (string)result.DataResult[0][1], true);
         }
@@ -83,7 +83,7 @@ namespace MessengerServiceLib.DataBase
         /// <param name="message">Сообщение для добавления</param>
         public void AddMessage(Message message)
         {
-            DBquery.Execute("INSERT INTO messages (`sender`, `reciever`, `text`) VALUES (" + message.SenderId + ", " + message.RecieverId + ", \"" + message.Text + "\")");
+            DBquery.Execute("INSERT INTO messages ('sender', 'reciever', 'text') VALUES (" + message.SenderId + ", " + message.RecieverId + ", '" + message.Text + "')");
         }
 
         /// <summary>
@@ -115,10 +115,10 @@ namespace MessengerServiceLib.DataBase
         /// <returns>Список сообщений</returns>
         public IEnumerable<Message> GetMessages(int sender, int reciever)
         {
-            var result = DBquery.Execute("SELECT `time`, `text` FROM messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
+            var result = DBquery.Execute("SELECT 'time', 'text' FROM messages WHERE 'reciever'=" + reciever + " AND 'sender'=" + sender);
             var messages = result.DataResult.Select(message => new Message(sender, reciever, (DateTime)message[0], (string) message[1])).ToList();
 
-            DBquery.Execute("DELETE FROM messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
+            DBquery.Execute("DELETE FROM messages WHERE 'reciever'=" + reciever + " AND 'sender'=" + sender);
 
             return messages;
         }
