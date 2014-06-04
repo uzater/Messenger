@@ -72,9 +72,11 @@ namespace MessengerServiceLib.DataBase
             if (!IfUser(userId))
                 return null;
 
+            DBquery.Execute("UPDATE users SET refreshtime = NOW() WHERE id='" + userId + "'");
+
             var result = DBquery.Execute("SELECT * FROM users");
 
-            return result.DataResult.Select(user => new User((int) user[0], (string) user[1], (Int32) (DateTime.UtcNow.AddHours(4).Subtract((DateTime) user[2]).TotalSeconds) < 60)).ToList();
+            return result.DataResult.Select(user => new User((int) user[0], (string) user[1], (Int32) (DateTime.UtcNow.AddHours(4).Subtract((DateTime) user[2]).TotalSeconds) < 10)).ToList();
         }
         
         /// <summary>
