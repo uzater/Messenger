@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using MessengerClientLib;
 using MessengerClientLib.ApplicationController;
 using MessengerClientLib.Interfaces;
 using MessengerClientLib.Presenters;
+using MessengerClientLib.Services;
 
 namespace MessengerClientGUI
 {
@@ -15,12 +15,17 @@ namespace MessengerClientGUI
         [STAThread]
         private static void Main()
         {
+            IExceptionHandler exceptionHandler = new ExceptionHandler();
+            Application.ThreadException += exceptionHandler.Handle;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             var controller = new ApplicationController(new LightInjectAdapter())
                            .RegisterView<ILoginForm, LoginForm>()
+                           .RegisterService<ILoginService, LoginService>()
                            .RegisterView<IMessengerForm, MessengerForm>()
+                           .RegisterService<IMessengerService, MessengerService>()
                            .RegisterInstance(new ApplicationContext());
 
             controller.Run<LoginPresenter>();

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using MessengerClientLib;
+using MessengerClientLib.EventsArgs;
 using MessengerClientLib.Interfaces;
 
 namespace MessengerClientGUI
@@ -25,6 +24,7 @@ namespace MessengerClientGUI
 
         public event EventHandler<SelectedIndexChangedArgs> SelectedIndexChangedAct;
         public event EventHandler<SendMessageArgs> SendMessageAct;
+
 
 // ReSharper disable once ConvertToAutoProperty
         public Label LabelName
@@ -87,17 +87,12 @@ namespace MessengerClientGUI
 
         private void listBoxUsers_DrawItem(object sender, DrawItemEventArgs e)
         {
-            // Копируем координаты нашего прямоугольника для дальшейнего изменения начала координаты Х
             Rectangle step = e.Bounds;
 
-            // Рисуем фон в пределах границы нашего прямоугольника
             e.DrawBackground();
             Brush myBrush = Brushes.Black;
 
-            // Инициируем новый шрифт
-            Font myFont = new Font(Font.FontFamily, Font.Size, FontStyle.Regular, Font.Unit);
-
-            // Перебираем каждый элемент выводимой строки на поиск условного символа для переключения на новый шрифт
+            var myFont = new Font(Font.FontFamily, Font.Size, FontStyle.Regular, Font.Unit);
 
             if (listBoxUsers.Items[e.Index].ToString()[0] == '*')
             {
@@ -108,24 +103,6 @@ namespace MessengerClientGUI
             {
                 e.Graphics.DrawString(listBoxUsers.Items[e.Index].ToString(), myFont, myBrush, step, StringFormat.GenericDefault);
             }
-
-            
-
-
-            //foreach (char myItem in ((ListBox)sender).Items[e.Index].ToString())
-            //{
-            //    // Если этот символ найден, тогда переключаемся на новый шрифт
-            //    if (myItem == '!') // тут может можно что-то получше придумать...
-            //        myFont = new Font(Font.FontFamily, Font.Size, FontStyle.Regular, Font.Unit);
-
-            //    // Выводим наш символ
-            //    e.Graphics.DrawString(myItem.ToString(),
-            //        myFont, myBrush, step, StringFormat.GenericDefault);
-            //    e.DrawFocusRectangle();
-
-            //    // Меняем координату Х с учетом ширины выведенного символа
-            //    step.X += TextRenderer.MeasureText(myItem.ToString(), myFont).Width - 7;
-            //}
         }
     }
 }

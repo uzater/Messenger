@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -40,6 +41,8 @@ namespace MessengerClientGUI
             this.textBoxMessage = new System.Windows.Forms.TextBox();
             this.buttonSendMessage = new System.Windows.Forms.Button();
             this.richTextBoxMessages = new System.Windows.Forms.RichTextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelName
@@ -103,6 +106,17 @@ namespace MessengerClientGUI
             this.richTextBoxMessages.TabIndex = 6;
             this.richTextBoxMessages.Text = "Выберите пользователя в списке справа\n";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(13, 17);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.TabIndex = 7;
+            // 
             // MessengerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -116,6 +130,7 @@ namespace MessengerClientGUI
             this.Controls.Add(this.labelName);
             this.Name = "MessengerForm";
             this.Text = "Messenger";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,5 +144,46 @@ namespace MessengerClientGUI
         private System.Windows.Forms.TextBox textBoxMessage;
         private System.Windows.Forms.Button buttonSendMessage;
         private System.Windows.Forms.RichTextBox richTextBoxMessages;
+        public void SetMyName(string username)
+        {
+            labelName.Text = username;
+        }
+
+        public void StartChatWithUser(string username, string history)
+        {
+            Text = "Messenger | " + username;
+            TextBoxMessage.Enabled = true;
+            ButtonSendMessage.Enabled = true;
+
+            RichTextBoxMessages.Text = history;
+        }
+
+        public void UpdateHistory(string history)
+        {
+            RichTextBoxMessages.Text = history;
+
+            TextBoxMessage.Clear();
+
+            RichTextBoxMessages.SelectionStart = RichTextBoxMessages.TextLength;
+            RichTextBoxMessages.ScrollToCaret();
+        }
+
+        public void RefreshUserList(List<ShowedUser> showedUserList, int focusedIndex)
+        {
+            ListBoxUsers.BeginUpdate();
+            
+            ListBoxUsers.Items.Clear();
+
+            foreach (ShowedUser user in showedUserList)
+                listBoxUsers.Items.Add(((user.Onlinek__BackingField) ? "*" : "") + user.Usernamek__BackingField +
+                                            ((user.NewMessagesCount != 0) ? (" (" + user.NewMessagesCount + ")") : ""));
+
+
+            ListBoxUsers.SelectedIndex = focusedIndex;
+
+            ListBoxUsers.EndUpdate();
+        }
+
+        private DataGridView dataGridView1;
     }
 }

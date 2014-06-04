@@ -1,28 +1,47 @@
 ﻿using MessengerClientLib.EventsArgs;
 using MessengerClientLib.Interfaces;
 using MessengerClientLib.MessengerServiceReference;
+using MessengerClientLib.Services;
 
 namespace MessengerClientLib.Presenters
 {
-    public class LoginPresenter : BasePresener<ILoginForm>
+    /// <summary>
+    /// Презентер формы для входа
+    /// </summary>
+    public class LoginPresenter : BasePresenter<ILoginForm>
     {
-        public LoginPresenter(IApplicationController controller, ILoginForm view)
+        /// <summary>
+        /// Сервис входа
+        /// </summary>
+        private readonly ILoginService _loginService;
+
+        /// <summary>
+        /// Конструктор презентера для входа
+        /// </summary>
+        /// <param name="controller">Контроллер приложения</param>
+        /// <param name="view">Интерфейс формы</param>
+        /// <param name="service"></param>
+        public LoginPresenter(IApplicationController controller, ILoginForm view, ILoginService service = null)
             : base(controller, view)
         {
+            _loginService = service ?? new LoginService();
+
             View.LoginAct += DoLoginAct;
         }
 
+        /// <summary>
+        /// Обработчик входа в систему
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">Параметры входа</param>
         private void DoLoginAct(object sender, LoginArgs e)
         {
-            using (var client = new MessengerServiceClient())
-            {
-                var loggedUser = client.Login(e.Username);
+            var loggedUser = _loginService.Login(e.Username);
 
-                if (loggedUser != null)
-                {
-                    Controller.Run<MessengerPresenter, User>(loggedUser);
-                    View.Close();
-                }
+            if (loggedUser != null)
+            {
+                Controller.Run<MessengerPresenter, User>(loggedUser);
+                View.Close();
             }
         }
     }

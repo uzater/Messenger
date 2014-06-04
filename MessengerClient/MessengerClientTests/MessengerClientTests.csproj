@@ -30,12 +30,55 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LightInject, Version=3.0.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\LightInject.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\Libs\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\Libs\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ApplicationPresenterTests.cs" />
+    <Compile Include="HistoryTest.cs" />
+    <Compile Include="HistoryTests.cs" />
+    <Compile Include="LightInjectAdapterTests.cs" />
+    <Compile Include="LoginPresenterTests.cs" />
+    <Compile Include="LoginServiceTests.cs" />
+    <Compile Include="MessengerPresenterTests.cs" />
+    <Compile Include="MessengerServiceTests.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowedUserTest.cs" />
+    <Compile Include="ShowedUserTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MessengerClientLib\MessengerClientLib.csproj">
+      <Project>{D99C3E01-E913-47BA-A45C-FF63F82A1ED6}</Project>
+      <Name>MessengerClientLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\LightInject.dll" />
+    <Content Include="bin\Debug\MessengerClientLib.dll" />
+    <Content Include="bin\Debug\MessengerClientLib.pdb" />
+    <Content Include="bin\Debug\MessengerClientTests.dll" />
+    <Content Include="bin\Debug\MessengerClientTests.pdb" />
+    <Content Include="bin\Debug\Moq.dll" />
+    <Content Include="bin\Debug\nunit.framework.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
