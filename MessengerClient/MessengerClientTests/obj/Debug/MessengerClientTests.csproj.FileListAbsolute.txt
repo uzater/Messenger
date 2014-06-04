@@ -5,10 +5,3 @@ D:\Repository\MessengerClient\MessengerClientTests\bin\Debug\MessengerClientLib.
 D:\Repository\MessengerClient\MessengerClientTests\obj\Debug\MessengerClientTests.csprojResolveAssemblyReference.cache
 D:\Repository\MessengerClient\MessengerClientTests\obj\Debug\MessengerClientTests.dll
 D:\Repository\MessengerClient\MessengerClientTests\obj\Debug\MessengerClientTests.pdb
-d:\Repository\Messenger\MessengerClient\MessengerClientTests\bin\Debug\MessengerClientTests.dll
-d:\Repository\Messenger\MessengerClient\MessengerClientTests\bin\Debug\MessengerClientTests.pdb
-d:\Repository\Messenger\MessengerClient\MessengerClientTests\bin\Debug\MessengerClientLib.dll
-d:\Repository\Messenger\MessengerClient\MessengerClientTests\bin\Debug\MessengerClientLib.pdb
-d:\Repository\Messenger\MessengerClient\MessengerClientTests\obj\Debug\MessengerClientTests.csprojResolveAssemblyReference.cache
-d:\Repository\Messenger\MessengerClient\MessengerClientTests\obj\Debug\MessengerClientTests.dll
-d:\Repository\Messenger\MessengerClient\MessengerClientTests\obj\Debug\MessengerClientTests.pdb
