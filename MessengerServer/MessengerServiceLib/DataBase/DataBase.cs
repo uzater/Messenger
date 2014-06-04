@@ -83,7 +83,7 @@ namespace MessengerServiceLib.DataBase
         /// <param name="message">Сообщение для добавления</param>
         public void AddMessage(Message message)
         {
-            DBquery.Execute("INSERT INTO messages ('sender', 'reciever', 'text') VALUES (" + message.SenderId + ", " + message.RecieverId + ", '" + message.Text + "')");
+            DBquery.Execute("INSERT INTO messages (`sender`, `reciever`, `text`) VALUES (" + message.SenderId + ", " + message.RecieverId + ", \"" + message.Text + "\")");
         }
 
         /// <summary>
@@ -115,10 +115,10 @@ namespace MessengerServiceLib.DataBase
         /// <returns>Список сообщений</returns>
         public IEnumerable<Message> GetMessages(int sender, int reciever)
         {
-            var result = DBquery.Execute("SELECT 'time', 'text' FROM messages WHERE 'reciever'=" + reciever + " AND 'sender'=" + sender);
+            var result = DBquery.Execute("SELECT `time`, `text` FROM messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
             var messages = result.DataResult.Select(message => new Message(sender, reciever, (DateTime)message[0], (string) message[1])).ToList();
 
-            DBquery.Execute("DELETE FROM messages WHERE 'reciever'=" + reciever + " AND 'sender'=" + sender);
+            DBquery.Execute("DELETE FROM messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
 
             return messages;
         }
