@@ -73,12 +73,25 @@ namespace MessengerClientGUI
 
         private void buttonSendMessage_Click(object sender, EventArgs e)
         {
+            if (textBoxMessage.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Сообщение содержит запрещенные символы.");
+                return;
+            }
+
+
             if (SendMessageAct != null)
                 SendMessageAct(this, new SendMessageArgs(textBoxMessage.Text));
         }
 
         private void textBoxMessage_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter && textBoxMessage.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Сообщение содержит запрещенные символы.");
+                return;
+            }
+
             if (e.KeyCode == Keys.Enter && SendMessageAct != null)
             {
                 SendMessageAct(this, new SendMessageArgs(textBoxMessage.Text));

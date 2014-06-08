@@ -1,4 +1,5 @@
-﻿using MessengerClientLib.Interfaces;
+﻿using System.Windows.Forms;
+using MessengerClientLib.Interfaces;
 using MessengerClientLib.MessengerServiceReference;
 
 namespace MessengerClientLib.Services

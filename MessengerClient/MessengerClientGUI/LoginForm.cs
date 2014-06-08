@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using MessengerClientLib.EventsArgs;
 using MessengerClientLib.Interfaces;
@@ -28,15 +29,20 @@ namespace MessengerClientGUI
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            if(LoginAct != null)
-                LoginAct(sender, new LoginArgs(textBoxLoginName.Text));
+            if (textBoxLoginName.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Имя пользователя не может быть пустым, содержать только пробелы.");
+                textBoxLoginName.Text = "";
+                return;
+            }
+
+            if (LoginAct != null && textBoxLoginName.Text.Trim() != string.Empty)
+                LoginAct(sender, new LoginArgs(textBoxLoginName.Text.Trim()));
         }
         private void textBoxLoginName_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && LoginAct != null)
-            {
-                LoginAct(sender, new LoginArgs(textBoxLoginName.Text));
-            }
+            if (e.KeyCode == Keys.Enter)
+                buttonLogin_Click(sender, e);
         }
     }
 }

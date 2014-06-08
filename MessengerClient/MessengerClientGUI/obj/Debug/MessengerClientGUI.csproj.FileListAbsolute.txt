@@ -21,3 +21,16 @@ D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.Pr
 D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.csproj.GenerateResource.Cache
 D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.exe
 D:\Repository\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.pdb
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientGUI.exe.config
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientGUI.exe
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientGUI.pdb
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientLib.dll
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\bin\Debug\LightInject.dll
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\bin\Debug\MessengerClientLib.pdb
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.csprojResolveAssemblyReference.cache
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.LoginForm.resources
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.MessengerForm.resources
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.Properties.Resources.resources
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.csproj.GenerateResource.Cache
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.exe
+d:\Repository\Messenger\MessengerClient\MessengerClientGUI\obj\Debug\MessengerClientGUI.pdb

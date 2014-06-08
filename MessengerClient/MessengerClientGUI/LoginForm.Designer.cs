@@ -34,6 +34,7 @@ namespace MessengerClientGUI
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxLoginName = new System.Windows.Forms.TextBox();
             this.buttonLogin = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -50,6 +51,7 @@ namespace MessengerClientGUI
             // 
             this.textBoxLoginName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxLoginName.Location = new System.Drawing.Point(55, 51);
+            this.textBoxLoginName.MaxLength = 16;
             this.textBoxLoginName.Name = "textBoxLoginName";
             this.textBoxLoginName.Size = new System.Drawing.Size(179, 26);
             this.textBoxLoginName.TabIndex = 1;
@@ -68,11 +70,21 @@ namespace MessengerClientGUI
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(61, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(173, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "(длина не более 16-ти символов)";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(288, 125);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.textBoxLoginName);
             this.Controls.Add(this.label1);
@@ -91,5 +103,6 @@ namespace MessengerClientGUI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxLoginName;
         private System.Windows.Forms.Button buttonLogin;
+        private System.Windows.Forms.Label label2;
     }
 }

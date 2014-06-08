@@ -3,8 +3,8 @@ D:\Repository\MessengerServer\MessengerServiceLib\bin\Debug\MessengerServiceLib.
 D:\Repository\MessengerServer\MessengerServiceLib\bin\Debug\MessengerServiceLib.pdb
 D:\Repository\MessengerServer\MessengerServiceLib\obj\Debug\MessengerServiceLib.dll
 D:\Repository\MessengerServer\MessengerServiceLib\obj\Debug\MessengerServiceLib.pdb
-d:\Repository\Messenger\MessengerServer\MessengerServiceLib\bin\Debug\MessengerServiceLib.dll
-d:\Repository\Messenger\MessengerServer\MessengerServiceLib\bin\Debug\MessengerServiceLib.pdb
-d:\Repository\Messenger\MessengerServer\MessengerServiceLib\obj\Debug\MessengerServiceLib.csprojResolveAssemblyReference.cache
-d:\Repository\Messenger\MessengerServer\MessengerServiceLib\obj\Debug\MessengerServiceLib.dll
-d:\Repository\Messenger\MessengerServer\MessengerServiceLib\obj\Debug\MessengerServiceLib.pdb
+D:\Repository\Messenger\MessengerServer\MessengerServiceLib\bin\Debug\MessengerServiceLib.dll
+D:\Repository\Messenger\MessengerServer\MessengerServiceLib\bin\Debug\MessengerServiceLib.pdb
+D:\Repository\Messenger\MessengerServer\MessengerServiceLib\obj\Debug\MessengerServiceLib.csprojResolveAssemblyReference.cache
+D:\Repository\Messenger\MessengerServer\MessengerServiceLib\obj\Debug\MessengerServiceLib.dll
+D:\Repository\Messenger\MessengerServer\MessengerServiceLib\obj\Debug\MessengerServiceLib.pdb

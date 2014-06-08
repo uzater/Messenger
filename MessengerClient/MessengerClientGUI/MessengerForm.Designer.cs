@@ -42,6 +42,7 @@ namespace MessengerClientGUI
             this.buttonSendMessage = new System.Windows.Forms.Button();
             this.richTextBoxMessages = new System.Windows.Forms.RichTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,6 +82,7 @@ namespace MessengerClientGUI
             // 
             this.textBoxMessage.Enabled = false;
             this.textBoxMessage.Location = new System.Drawing.Point(5, 473);
+            this.textBoxMessage.MaxLength = 900;
             this.textBoxMessage.Name = "textBoxMessage";
             this.textBoxMessage.Size = new System.Drawing.Size(485, 20);
             this.textBoxMessage.TabIndex = 4;
@@ -117,11 +119,21 @@ namespace MessengerClientGUI
             this.dataGridView1.Size = new System.Drawing.Size(240, 150);
             this.dataGridView1.TabIndex = 7;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 507);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(293, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Максимальная длина ообщения не более 900 символов";
+            // 
             // MessengerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(785, 504);
+            this.ClientSize = new System.Drawing.Size(785, 529);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBoxMessages);
             this.Controls.Add(this.buttonSendMessage);
             this.Controls.Add(this.textBoxMessage);
@@ -185,5 +197,6 @@ namespace MessengerClientGUI
         }
 
         private DataGridView dataGridView1;
+        private Label label1;
     }
 }

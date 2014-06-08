@@ -15,18 +15,27 @@ namespace MessengerServiceHost
             DataBaseConnection.DBHost = "localhost";
             DataBaseConnection.DBUser = "root";
             DataBaseConnection.DBPass = "pass";
+            DataBaseConnection.DBPrefix = "";
 
             #endregion
 
             Console.WriteLine("Messenger Server in running...");
 
-            using (var serviceHost = new ServiceHost(typeof (MessengerService)))
+            try
             {
+                var serviceHost = new ServiceHost(typeof(MessengerService));
                 serviceHost.Open();
-
                 Console.WriteLine();
                 Console.WriteLine("Messenger service is ready.");
                 Console.WriteLine("Press <Enter> to exit.");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error. Service couldn't be run.");
+                Console.WriteLine("Press <Enter> to exit.");
+            }
+            finally
+            {
                 Console.ReadLine();
             }
         }

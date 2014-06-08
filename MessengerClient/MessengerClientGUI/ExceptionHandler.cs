@@ -7,7 +7,20 @@ namespace MessengerClientGUI
     {
         public void Handle(object sender, ThreadExceptionEventArgs threadExceptionEventArgs)
         {
-            MessageBox.Show(threadExceptionEventArgs.Exception.Message, @"Application error");
+            if (threadExceptionEventArgs.Exception.InnerException != null && threadExceptionEventArgs.Exception.InnerException.InnerException != null)
+            {
+                MessageBox.Show(@"Сервер не отвечает, повторите попытку позже.", @"Ошибка приложения");
+                Application.ExitThread();
+                return;
+            }
+
+            MessageBox.Show(
+                threadExceptionEventArgs.Exception.InnerException != null
+                    ? threadExceptionEventArgs.Exception.InnerException.Message
+                    : threadExceptionEventArgs.Exception.Message, @"Ошибка приложения");
+
+            if (threadExceptionEventArgs.Exception.Message != "Пользователь с таким именем уже онлайн!")
+                Application.ExitThread();
         }
     }
 }

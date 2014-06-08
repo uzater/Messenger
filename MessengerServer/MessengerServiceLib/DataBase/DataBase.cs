@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MySql.Data.MySqlClient;
 
 namespace MessengerServiceLib.DataBase
 {
@@ -32,7 +33,7 @@ namespace MessengerServiceLib.DataBase
         /// <returns>TRUE, если пользователь существует, иначе FALSE</returns>
         public bool IfUser(string username)
         {
-            return CheckUser("SELECT * FROM users WHERE name='" + username + "'");
+            return CheckUser("SELECT * FROM " + DataBaseConnection.DBPrefix + "users WHERE name='" + MySqlHelper.EscapeString(username) + "'");
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace MessengerServiceLib.DataBase
         /// <returns>TRUE, если пользователь существует, иначе FALSE</returns>
         public bool IfUser(int id)
         {
-            return CheckUser("SELECT * FROM users WHERE id='" + id + "'");
+            return CheckUser("SELECT * FROM " + DataBaseConnection.DBPrefix + "users WHERE id='" + id + "'");
         }
 
         /// <summary>
@@ -52,12 +53,17 @@ namespace MessengerServiceLib.DataBase
         /// <returns>Объект типа 'User' - текущий пользователь</returns>
         public User Login(string username)
         {
-            var query = (IfUser(username))
-                ? "UPDATE users SET refreshtime = NOW() WHERE name='" + username + "'"
-                : "INSERT INTO users ('name') VALUES ('" + username + "')";
-            DBquery.Execute(query);
+            if (!IfUser(username))
+                DBquery.Execute("INSERT INTO " + DataBaseConnection.DBPrefix + "users (`name`) VALUES (\"" + MySqlHelper.EscapeString(username) +
+                                "\")");
+            else
+            {
+                var refreshtime = DBquery.Execute("SELECT refreshtime FROM " + DataBaseConnection.DBPrefix + "users WHERE name='" + MySqlHelper.EscapeString(username) + "'");
+                if ((Int32) (DateTime.UtcNow.AddHours(4).Subtract((DateTime) refreshtime.DataResult[0][0]).TotalSeconds) < 5)
+                    throw new Exception("Пользователь с таким именем уже онлайн!");
+            }
 
-            var result = DBquery.Execute("SELECT * FROM users WHERE name='" + username + "'");
+            var result = DBquery.Execute("SELECT * FROM " + DataBaseConnection.DBPrefix + "users WHERE name='" + MySqlHelper.EscapeString(username) + "'");
 
             return !result.Readable ? null : new User((int)result.DataResult[0][0], (string)result.DataResult[0][1], true);
         }
@@ -72,11 +78,11 @@ namespace MessengerServiceLib.DataBase
             if (!IfUser(userId))
                 return null;
 
-            DBquery.Execute("UPDATE users SET refreshtime = NOW() WHERE id='" + userId + "'");
+            DBquery.Execute("UPDATE " + DataBaseConnection.DBPrefix + "users SET refreshtime = NOW() WHERE id='" + userId + "'");
 
-            var result = DBquery.Execute("SELECT * FROM users");
+            var result = DBquery.Execute("SELECT * FROM " + DataBaseConnection.DBPrefix + "users");
 
-            return result.DataResult.Select(user => new User((int) user[0], (string) user[1], (Int32) (DateTime.UtcNow.AddHours(4).Subtract((DateTime) user[2]).TotalSeconds) < 10)).ToList();
+            return result.DataResult.Select(user => new User((int) user[0], (string) user[1], (Int32) (DateTime.UtcNow.AddHours(4).Subtract((DateTime) user[2]).TotalSeconds) < 5)).ToList();
         }
         
         /// <summary>
@@ -85,7 +91,7 @@ namespace MessengerServiceLib.DataBase
         /// <param name="message">Сообщение для добавления</param>
         public void AddMessage(Message message)
         {
-            DBquery.Execute("INSERT INTO messages (`sender`, `reciever`, `text`) VALUES (" + message.SenderId + ", " + message.RecieverId + ", \"" + message.Text + "\")");
+            DBquery.Execute("INSERT INTO " + DataBaseConnection.DBPrefix + "messages (`sender`, `reciever`, `text`) VALUES (" + message.SenderId + ", " + message.RecieverId + ", \"" + MySqlHelper.EscapeString(message.Text) + "\")");
         }
 
         /// <summary>
@@ -94,7 +100,7 @@ namespace MessengerServiceLib.DataBase
         /// <param name="messageId">Идентификатор сообщение для удаления</param>
         public void DeleteMessage(int messageId)
         {
-            DBquery.Execute("DELETE FROM message WHERE id=" + messageId);
+            DBquery.Execute("DELETE FROM " + DataBaseConnection.DBPrefix + "messages WHERE id=" + messageId);
         }
 
         /// <summary>
@@ -104,7 +110,7 @@ namespace MessengerServiceLib.DataBase
         /// <returns>Имя пользователя</returns>
         public string GetUserName(int userId)
         {
-            var result = DBquery.Execute("SELECT name FROM users WHERE id=" + userId);
+            var result = DBquery.Execute("SELECT name FROM " + DataBaseConnection.DBPrefix + "users WHERE id=" + userId);
 
             return (!result.Readable) ? "NONAME" : (string)result.DataResult[0][0];
         }
@@ -117,10 +123,10 @@ namespace MessengerServiceLib.DataBase
         /// <returns>Список сообщений</returns>
         public IEnumerable<Message> GetMessages(int sender, int reciever)
         {
-            var result = DBquery.Execute("SELECT `time`, `text` FROM messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
+            var result = DBquery.Execute("SELECT `time`, `text` FROM " + DataBaseConnection.DBPrefix + "messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
             var messages = result.DataResult.Select(message => new Message(sender, reciever, (DateTime)message[0], (string) message[1])).ToList();
 
-            DBquery.Execute("DELETE FROM messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
+            DBquery.Execute("DELETE FROM " + DataBaseConnection.DBPrefix + "messages WHERE `reciever`=" + reciever + " AND `sender`=" + sender);
 
             return messages;
         }

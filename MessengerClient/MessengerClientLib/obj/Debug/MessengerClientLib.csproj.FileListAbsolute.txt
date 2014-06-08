@@ -5,3 +5,10 @@ D:\Repository\MessengerClient\MessengerClientLib\bin\Debug\LightInject.dll
 D:\Repository\MessengerClient\MessengerClientLib\obj\Debug\MessengerClientLib.csprojResolveAssemblyReference.cache
 D:\Repository\MessengerClient\MessengerClientLib\obj\Debug\MessengerClientLib.dll
 D:\Repository\MessengerClient\MessengerClientLib\obj\Debug\MessengerClientLib.pdb
+d:\Repository\Messenger\MessengerClient\MessengerClientLib\bin\Debug\MessengerClientLib.dll.config
+d:\Repository\Messenger\MessengerClient\MessengerClientLib\bin\Debug\MessengerClientLib.dll
+d:\Repository\Messenger\MessengerClient\MessengerClientLib\bin\Debug\MessengerClientLib.pdb
+d:\Repository\Messenger\MessengerClient\MessengerClientLib\bin\Debug\LightInject.dll
+d:\Repository\Messenger\MessengerClient\MessengerClientLib\obj\Debug\MessengerClientLib.csprojResolveAssemblyReference.cache
+d:\Repository\Messenger\MessengerClient\MessengerClientLib\obj\Debug\MessengerClientLib.dll
+d:\Repository\Messenger\MessengerClient\MessengerClientLib\obj\Debug\MessengerClientLib.pdb

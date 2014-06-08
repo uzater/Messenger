@@ -28,7 +28,9 @@ namespace MessengerServiceLib
             }
             catch (Exception exception)
             {
-                throw new FaultException(exception.Message);
+                if (exception.Message == "Пользователь с таким именем уже онлайн!")
+                    throw new FaultException("Пользователь с таким именем уже онлайн!");
+                throw new FaultException("Ошибка сервера. Попробуйте подключиться позже.");
             }
         }
 
@@ -44,9 +46,9 @@ namespace MessengerServiceLib
                 var userList = DataStore.GetUsers(userId);
                 return userList.Where(u => u.Id != userId);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                throw new FaultException(exception.Message);
+                throw new FaultException("Ошибка сервера. Попробуйте подключиться позже.");
             }     
         }
 
@@ -61,11 +63,11 @@ namespace MessengerServiceLib
                 if (DataStore.IfUser(message.SenderId) && DataStore.IfUser(message.RecieverId))
                     DataStore.AddMessage(message);
                 else
-                    throw new FaultException("Cann't send message. User not found.");
+                    throw new FaultException("Пользователь не найден");
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                throw new FaultException(exception.Message);
+                throw new FaultException("Ошибка сервера. Попробуйте подключиться позже.");
             }
             
         }
@@ -81,9 +83,9 @@ namespace MessengerServiceLib
             {
                 return DataStore.GetUserName(userId);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                throw new FaultException(exception.Message);
+                throw new FaultException("Ошибка сервера. Попробуйте подключиться позже.");
             }
         }
 
@@ -99,9 +101,9 @@ namespace MessengerServiceLib
             {
                 return DataStore.GetMessages(sender, reciever);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                throw new FaultException(exception.Message);
+                throw new FaultException("Ошибка сервера. Попробуйте подключиться позже.");
             }
         }
     }

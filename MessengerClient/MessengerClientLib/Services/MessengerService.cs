@@ -131,6 +131,9 @@ namespace MessengerClientLib.Services
         /// <param name="index">Индекс</param>
         public void DoSelectedIndexChangeAct(int index)
         {
+            if (index == -1)
+                return;
+
             FocusedUser = ShowedUserList[index];
 
             if (Histories.All(h => h.User.Idk__BackingField != FocusedUser.Idk__BackingField))

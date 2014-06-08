@@ -28,10 +28,7 @@ namespace MessengerServiceLib.DataBase
         /// </summary>
         public static string DBPass { get; set; }
 
-        /// <summary>
-        /// Префикс таблиц
-        /// </summary>
-        public static string DBPrefix { get; set; }
+        public static string DBUsersTable { get; set; }
         
     }
 }
